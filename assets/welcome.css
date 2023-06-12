@@ -11,10 +11,8 @@ body {
     object-fit: cover;
 }
 
-#logo {
-    width: 10em;
-    padding: 35px 0px 15px 0px;
-}
+/* FONT e INTERLINEA */
+
 
 h1 {
     font-family: 'Outfit', sans-serif;
@@ -39,12 +37,26 @@ h3 {
     font-weight: bold;
 }
 
+
+li {
+    line-height: 1.6;
+}
+
+/* MAIN */
+
 main {
     margin-left: 6em;
 }
 
-li {
-    line-height: 1.6;
+#logo {
+    width: 10em;
+    padding: 35px 0px 15px 0px;
+}
+
+.container {
+    height: 80vh;
+    width: 70vw;
+    margin-top: 30px;
 }
 
 .instructions h3 {
@@ -58,6 +70,8 @@ li {
 .instructions li {
     margin-left: 2em;
 }
+
+/* CHECKBOX */
 
 .bottom {
     margin-top: 6em;
@@ -74,14 +88,17 @@ li {
 }
 
 .bottom input {
-    border: 3px solid #ffffff;
-    border-radius: 0px;
+    height: 1.25rem;
+    width: 1.25rem;
+    vertical-align: middle;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0);
+    transition: background 250ms;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 0.2rem;
 }
 
-.container {
-    height: 80vh;
-    width: 70vw;
-}
+/* BOTTONE PROCEED */
 
 .myButton {
     font-family: 'Outfit', sans-serif;
@@ -93,3 +110,4 @@ li {
     box-shadow: 0px 1px 30px 0px #00FFFF;
     border: none;
 }
+
