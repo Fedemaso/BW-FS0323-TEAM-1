@@ -212,4 +212,45 @@ function showResults() {
         showResults();
       }
     }
+
+
+
+    // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
+function calculateResult() {
+  // Calcola il numero di risposte corrette
+  const correctAnswers = userAnswers.filter(
+    (answer, index) => answer === questions[index].correct_answer
+  );
+
+  // Crea l'elemento del banner dei risultati
+  const resultBanner = document.createElement("div");
+  resultBanner.id = "result-banner";
+
+  // Verifica il punteggio e imposta il contenuto del banner in base al risultato
+  if (correctAnswers.length < 5) {
+    resultBanner.className = "red";
+    resultBanner.textContent = "Non hai passato l'esame";
+  } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
+    resultBanner.className = "yellow";
+    resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
+  } else {
+    resultBanner.className = "green";
+    resultBanner.textContent = "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
+  }
+
+  // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
+  const questionContainer = document.getElementById("question-container");
+  questionContainer.innerHTML = "";
+  questionContainer.appendChild(resultBanner);
+}
+
+// Mostra i risultati delle risposte dell'utente
+function showResults() {
+  console.log("Risposte dell'utente:", userAnswers);
+  calculateResult();
+}
+
     
+
+
+
