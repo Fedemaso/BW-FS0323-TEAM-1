@@ -1,13 +1,44 @@
 let timerNumber = document.getElementById('timer-number');
-let countdown = 10;
+let countdown = 60;
+let timerInterval;
+
 
 timerNumber.textContent = countdown;
 
 setInterval(function() {
-  countdown = --countdown <= 0 ? 10 : countdown;
+  countdown = --countdown <= 0 ? 60 : countdown;
 
   timerNumber.textContent = countdown;
 }, 1000);
+
+
+
+
+let startTimer = function() {
+  countdown = 61;
+
+  timerInterval = setInterval(function() {
+    countdown = --countdown <= 0 ? 60 : countdown;
+
+    timerNumber.textContent = countdown;
+
+
+    const progress = (countdown / 60) * 100;
+
+    const timerCircle = document.getElementById('timer-circle');
+    timerCircle.style.strokeDasharray = `${progress} 100`;
+
+
+    if (countdown === 0) {
+     
+      handleAnswerSelection(); // Passa alla domanda successiva
+    }
+  }, 1000);
+};
+
+
+
+
 // FedeMaso  
 
 
@@ -126,6 +157,9 @@ let score = 0; // Inizializza il punteggio a 0
 function showCurrentQuestion() {
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
 
+
+  
+
   // Mostra il testo della domanda
   const questionText = document.getElementById("question-text");
   questionText.textContent = currentQuestion.question;
@@ -162,12 +196,22 @@ function showCurrentQuestion() {
   optionsContainer.appendChild(document.createElement("br"));
 }
 
+
+
+
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
+  clearInterval(startTimer); // Interrompi il timer corrente
+  countdown = 60; // Resettare il countdown a 60
+
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   ).value;
   userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
+
+    
+  
+
 
   // Passa alla domanda successiva
   currentQuestionIndex++;
@@ -193,6 +237,9 @@ function showResults() {
       const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
       userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
     
+      startTimer();
+
+
       const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
       if (selectedAnswer === currentQuestion.correct_answer) {
         // Aggiungi un punto al punteggio se la risposta è corretta
