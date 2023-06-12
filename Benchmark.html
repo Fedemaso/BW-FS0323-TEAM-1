@@ -4,6 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Benchmark</title>
+    <link rel="stylesheet" href="assets/style.css">
   </head>
-  <body></body>
+  <body>
+    <div id="timer">
+      <div id="timer-number"></div>
+      <svg>
+        <circle r="18" cx="20" cy="20"></circle>
+      </svg>
+    </div>
+    </div>
+    <h1>Quiz App</h1>
+
+    <div id="question-container">
+      <h2 id="question-text"></h2>
+      <div id="options-container"></div>
+    </div>
+
+    <button onclick="handleAnswerSelection()">Next Question</button>
+
+    <div id="score-container">
+      <h3>Score: <span id="score">0</span></h3>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
