@@ -27,7 +27,7 @@ const config = {
     labels: ['Wrong', 'Correct']
   },
   options: {
-    cutoutPercentage: 70, 
+    cutout: 90, 
     responsive: true,
     maintainAspectRatio: false,
   }
