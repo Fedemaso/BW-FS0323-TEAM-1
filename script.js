@@ -110,14 +110,14 @@ const questions = [
 
 
 let timerNumber = document.getElementById('timer-number');
-let countdown = 31;
+let countdown = 11;
 let timerInterval;
 
 
 timerNumber.textContent = countdown;
 
 setInterval(function() {
-  countdown = --countdown <= 0 ? 31 : countdown;
+  countdown = --countdown <= -1 ? 11 : countdown;
 
   timerNumber.textContent = countdown;
 }, 1000);
@@ -126,15 +126,15 @@ setInterval(function() {
 
 
 let startTimer = function() {
-  countdown = 31;
+  countdown = 11;
 
   timerInterval = setInterval(function() {
-    countdown = --countdown <= 0 ? 31 : countdown;
+    countdown = --countdown <= -1 ? 11 : countdown;
 
     timerNumber.textContent = countdown;
 
 
-    const progress = (countdown / 31) * 1000;
+    const progress = (countdown / 11) * 1000;
 
 
     if (countdown === 0) {
@@ -202,7 +202,7 @@ function showCurrentQuestion() {
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
   clearInterval(timerInterval); // Interrompi il timer corrente
-  countdown = 31; // Reimposta il countdown a 31
+  countdown = 11; // Reimposta il countdown a 31
 
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
@@ -237,7 +237,7 @@ function handleAnswerSelection() {
 
 function handleTimerExpiration() {
   clearInterval(timerInterval); // Interrompi il timer corrente
-  countdown = 31; // Reimposta il countdown a 31
+  countdown = 11; // Reimposta il countdown a 31
 
   userAnswers.push(null); // Aggiungi una risposta nullo per indicare che il tempo è scaduto
 
