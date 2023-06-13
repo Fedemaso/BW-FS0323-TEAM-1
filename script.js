@@ -4,6 +4,8 @@ let countdown = 60;
 const totalQuestions = 6; // Numero totale di domande
 const correctAnswers = 4; // Numero di risposte corrette
 const incorrectAnswers = totalQuestions - correctAnswers; // Numero di risposte sbagliate
+let timerInterval;
+
 
 // Calcolo delle angolazioni in radianti
 const totalAngle = 2 * Math.PI;
@@ -15,6 +17,37 @@ setInterval(function() {
 
   timerNumber.textContent = countdown;
 }, 6000);
+}, 1000);
+
+
+
+
+let startTimer = function() {
+  countdown = 61;
+
+  timerInterval = setInterval(function() {
+    countdown = --countdown <= 0 ? 60 : countdown;
+
+    timerNumber.textContent = countdown;
+
+
+    const progress = (countdown / 60) * 100;
+
+    const timerCircle = document.getElementById('timer-circle');
+    timerCircle.style.strokeDasharray = `${progress} 100`;
+
+
+    if (countdown === 0) {
+     
+      handleAnswerSelection(); // Passa alla domanda successiva
+    }
+  }, 1000);
+};
+
+
+
+
+// FedeMaso  
 
 let feedbackIn = document.getElementById('feedback-input')
 feedbackIn.addEventListener('keydown', function(e){
@@ -138,6 +171,9 @@ let score = 0; // Inizializza il punteggio a 0
 function showCurrentQuestion() {
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
 
+
+  
+
   // Mostra il testo della domanda
   const questionText = document.getElementById("question-text");
   questionText.textContent = currentQuestion.question;
@@ -177,6 +213,32 @@ function showCurrentQuestion() {
 function updateChart() {
   config.data.datasets[0].data = [incorrectAngle, correctAngle];
   chart.update();
+
+
+
+
+// Funzione per gestire la selezione di una risposta
+function handleAnswerSelection() {
+  clearInterval(startTimer); // Interrompi il timer corrente
+  countdown = 60; // Resettare il countdown a 60
+
+  const selectedAnswer = document.querySelector(
+    'input[name="answer"]:checked'
+  ).value;
+  userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
+
+    
+  
+
+
+  // Passa alla domanda successiva
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showCurrentQuestion();
+  } else {
+    // Se tutte le domande sono state risposte, visualizza i risultati
+    showResults();
+  }
 }
 
 // Configurazione iniziale del grafico
@@ -212,6 +274,9 @@ function showResults() {
       const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
       userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
     
+      startTimer();
+
+
       const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
       if (selectedAnswer === currentQuestion.correct_answer) {
         // Aggiungi un punto al punteggio se la risposta è corretta
@@ -232,6 +297,44 @@ function showResults() {
         showResults()
       }
     }
+
+
+
+    // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
+function calculateResult() {
+  // Calcola il numero di risposte corrette
+  const correctAnswers = userAnswers.filter(
+    (answer, index) => answer === questions[index].correct_answer
+  );
+
+  // Crea l'elemento del banner dei risultati
+  const resultBanner = document.createElement("div");
+  resultBanner.id = "result-banner";
+
+  // Verifica il punteggio e imposta il contenuto del banner in base al risultato
+  if (correctAnswers.length < 5) {
+    resultBanner.className = "red";
+    resultBanner.textContent = "Non hai passato l'esame";
+  } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
+    resultBanner.className = "yellow";
+    resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
+  } else {
+    resultBanner.className = "green";
+    resultBanner.textContent = "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
+  }
+
+  // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
+  const questionContainer = document.getElementById("question-container");
+  questionContainer.innerHTML = "";
+  questionContainer.appendChild(resultBanner);
+}
+
+// Mostra i risultati delle risposte dell'utente
+function showResults() {
+  console.log("Risposte dell'utente:", userAnswers);
+  calculateResult();
+}
+
     
  // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
  function calculateResult() {
@@ -271,3 +374,5 @@ function showResults() {
 // Creazione del grafico
 const ctx = document.getElementById('chart').getContext('2d');
 const chart = new Chart(ctx, config);
+
+
