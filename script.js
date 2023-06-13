@@ -33,7 +33,7 @@ let startTimer = function() {
      
       handleAnswerSelection(); // Passa alla domanda successiva
     }
-  }, 1000);
+  }, 6000);
 };
 
 
