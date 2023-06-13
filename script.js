@@ -4,17 +4,43 @@ let countdown = 60;
 const totalQuestions = 6; // Numero totale di domande
 const correctAnswers = 4; // Numero di risposte corrette
 const incorrectAnswers = totalQuestions - correctAnswers; // Numero di risposte sbagliate
+let timerInterval;
 
-// Calcolo delle angolazioni in radianti
-const totalAngle = 2 * Math.PI;
-const correctAngle = (correctAnswers / totalQuestions) * totalAngle;
-const incorrectAngle = (incorrectAnswers / totalQuestions) * totalAngle;
 
-setInterval(function() {
-  countdown = --countdown <= 0 ? 60 : countdown;
+
+// FedeMaso  
 
   timerNumber.textContent = countdown;
 }, 6000);
+}, 1000);
+
+
+let startTimer = function() {
+  countdown = 61;
+
+  timerInterval = setInterval(function() {
+    countdown = --countdown <= 0 ? 60 : countdown;
+
+    timerNumber.textContent = countdown;
+
+
+    const progress = (countdown / 60) * 100;
+
+    const timerCircle = document.getElementById('timer-circle');
+    timerCircle.style.strokeDasharray = `${progress} 100`;
+
+
+    if (countdown === 0) {
+     
+      handleAnswerSelection(); // Passa alla domanda successiva
+    }
+  }, 1000);
+};
+
+
+
+
+// FedeMaso  
 
 let feedbackIn = document.getElementById('feedback-input')
 feedbackIn.addEventListener('keydown', function(e){
@@ -128,6 +154,46 @@ const questions = [
 
 
 
+
+  let timerNumber = document.getElementById('timer-number');
+let countdown = 31;
+let timerInterval;
+
+
+timerNumber.textContent = countdown;
+
+setInterval(function() {
+  countdown = --countdown <= 0 ? 31 : countdown;
+
+  timerNumber.textContent = countdown;
+}, 1000);
+
+
+let startTimer = function() {
+  countdown = 31;
+
+  timerInterval = setInterval(function() {
+    countdown = --countdown <= 0 ? 31 : countdown;
+
+    timerNumber.textContent = countdown;
+
+
+    const progress = (countdown / 31) * 100;
+
+    const timerCircle = document.getElementById('timer-circle');
+    timerCircle.style.strokeDasharray = `${progress} 100`;
+
+
+    if (countdown === 0) {
+     
+      handleTimerExpiration(); // Passa alla domanda successiva
+    }
+  }, 1000);
+};
+
+
+
+
 // Variabili
 let currentQuestionIndex = 0; // Indice della domanda corrente
 let userAnswers = []; // Array per salvare le risposte dell'utente
@@ -137,6 +203,9 @@ let score = 0; // Inizializza il punteggio a 0
 // Funzione per mostrare la domanda corrente
 function showCurrentQuestion() {
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
+
+
+  
 
   // Mostra il testo della domanda
   const questionText = document.getElementById("question-text");
@@ -179,24 +248,56 @@ function updateChart() {
   chart.update();
 }
 
-// Configurazione iniziale del grafico
-const config = {
-  type: 'doughnut',
-  data: {
-    datasets: [{
-      data: [incorrectAngle, correctAngle],
-      backgroundColor: ['#D20094', '#00FFFF'],
-      borderWidth: 0,
-      borderAlign: 'center',
-    }],
-    labels: ['Wrong', 'Correct']
-  },
-  options: {
-    cutoutPercentage: 70, 
-    responsive: true,
-    maintainAspectRatio: false,
+
+
+// Funzione per gestire la selezione di una risposta
+function handleAnswerSelection() {
+  clearInterval(startTimer); // Interrompi il timer corrente
+  countdown = 60; // Resettare il countdown a 60
+
+  const selectedAnswer = document.querySelector(
+    'input[name="answer"]:checked'
+  ).value;
+  userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
+
+    
+  
+
+  countdown = 31; // Resettare il countdown a 31
+
+  const selectedAnswer = document.querySelector(
+    'input[name="answer"]:checked'
+  )?.value;
+  userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
+   
+
+
+  const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
+      if (selectedAnswer === currentQuestion.correct_answer) {
+        // Aggiungi un punto al punteggio se la risposta è corretta
+        score++;
+      }
+    
+      // Aggiorna il punteggio visualizzato nell'HTML
+      const scoreElement = document.getElementById("score");
+      scoreElement.textContent = score;
+
+  // Passa alla domanda successiva
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showCurrentQuestion();
+  } else {
+    // Se tutte le domande sono state risposte, visualizza i risultati
+    showResults();
   }
-};
+}
+
+function handleTimerExpiration() {
+  clearInterval(timerInterval); // Interrompi il timer corrente
+  countdown = 31; // Reimposta il countdown a 31
+
+  handleAnswerSelection()
+}
 
 // Funzione per mostrare i risultati
 function showResults() {
@@ -212,6 +313,8 @@ function showResults() {
       const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
       userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
     
+      startTimer();
+
       const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
       if (selectedAnswer === currentQuestion.correct_answer) {
         // Aggiungi un punto al punteggio se la risposta è corretta
@@ -228,30 +331,32 @@ function showResults() {
         showCurrentQuestion();
       } else {
         // Se tutte le domande sono state risposte, apri la pagina dei risultati
-        window.location.href = "Results.html"
+        window.location.href = "Results.html" // Redirect a fine test alla pagina dei risultati
         showResults()
       }
     }
-    
- // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
- function calculateResult() {
+
+
+    // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
+function calculateResult() {
   // Calcola il numero di risposte corrette
   const correctAnswers = userAnswers.filter(
     (answer, index) => answer === questions[index].correct_answer
   );
 
   // Crea l'elemento del banner dei risultati
-  const resultBanner = document.getElementById('result-banner');
+  const resultBanner = document.createElement("div");
+  resultBanner.id = "result-banner";
 
   // Verifica il punteggio e imposta il contenuto del banner in base al risultato
   if (correctAnswers.length < 5) {
-    resultBanner.classList.add('fail')
+    resultBanner.className = "red";
     resultBanner.textContent = "Non hai passato l'esame";
   } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
-    resultBanner.classList.add('pass')
+    resultBanner.className = "yellow";
     resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
   } else {
-    resultBanner.classList.add('excellent')
+    resultBanner.className = "green";
     resultBanner.textContent = "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
   }
 
@@ -266,7 +371,6 @@ function showResults() {
   console.log("Risposte dell'utente:", userAnswers);
   calculateResult();
 }
-
     
 // Creazione del grafico
 const ctx = document.getElementById('chart').getContext('2d');
