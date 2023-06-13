@@ -155,6 +155,7 @@ li {
   justify-content: center;
   height: 100%;
   font-size: 3em; 
+}
 
 #timer-svg {
   position: absolute;
