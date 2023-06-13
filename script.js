@@ -1,9 +1,9 @@
 
 
-// FedeMaso  
+// // FedeMaso  
 
 
-// DOMANDE 
+// // DOMANDE 
 
 
 const questions = [
@@ -109,7 +109,7 @@ const questions = [
 
 
 
-  let timerNumber = document.getElementById('timer-number');
+let timerNumber = document.getElementById('timer-number');
 let countdown = 31;
 let timerInterval;
 
@@ -134,10 +134,7 @@ let startTimer = function() {
     timerNumber.textContent = countdown;
 
 
-    const progress = (countdown / 31) * 100;
-
-    const timerCircle = document.getElementById('timer-circle');
-    timerCircle.style.strokeDasharray = `${progress} 100`;
+    const progress = (countdown / 31) * 1000;
 
 
     if (countdown === 0) {
@@ -204,25 +201,45 @@ function showCurrentQuestion() {
 
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
-  clearInterval(startTimer); // Interrompi il timer corrente
-  countdown = 31; // Resettare il countdown a 31
+  clearInterval(timerInterval); // Interrompi il timer corrente
+  countdown = 31; // Reimposta il countdown a 31
 
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
   userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
-   
-
 
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
-      if (selectedAnswer === currentQuestion.correct_answer) {
-        // Aggiungi un punto al punteggio se la risposta è corretta
-        score++;
-      }
-    
-      // Aggiorna il punteggio visualizzato nell'HTML
-      const scoreElement = document.getElementById("score");
-      scoreElement.textContent = score;
+
+  if (selectedAnswer === currentQuestion.correct_answer) {
+    // Aggiungi un punto al punteggio se la risposta è corretta
+    score++;
+  }
+
+  // Aggiorna il punteggio visualizzato nell'HTML
+  const scoreElement = document.getElementById("score");
+  scoreElement.textContent = score;
+
+  // Passa alla domanda successiva
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showCurrentQuestion();
+  } else {
+    // Se tutte le domande sono state risposte, visualizza i risultati
+    showResults();
+  }
+
+  if (countdown === 0) {
+    handleTimerExpiration();
+    return;
+  }
+
+
+function handleTimerExpiration() {
+  clearInterval(timerInterval); // Interrompi il timer corrente
+  countdown = 31; // Reimposta il countdown a 31
+
+  userAnswers.push(null); // Aggiungi una risposta nullo per indicare che il tempo è scaduto
 
   // Passa alla domanda successiva
   currentQuestionIndex++;
@@ -233,13 +250,12 @@ function handleAnswerSelection() {
     showResults();
   }
 }
-
-function handleTimerExpiration() {
-  clearInterval(timerInterval); // Interrompi il timer corrente
-  countdown = 31; // Reimposta il countdown a 31
-
-  handleAnswerSelection()
 }
+
+
+
+
+
 
 // Funzione per mostrare i risultati
 function showResults() {
@@ -250,9 +266,6 @@ function showResults() {
   // Mostra la prima domanda all'avvio
   showCurrentQuestion();
   
-  
-
-
 
     // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
 function calculateResult() {
@@ -290,6 +303,4 @@ function showResults() {
 }
 
     
-
-
 
