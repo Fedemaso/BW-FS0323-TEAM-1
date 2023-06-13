@@ -1,28 +1,14 @@
-let timerNumber = document.getElementById('timer-number');
-let countdown = 60;
-// Dati del quiz esterno
-const totalQuestions = 6; // Numero totale di domande
-const correctAnswers = 4; // Numero di risposte corrette
-const incorrectAnswers = totalQuestions - correctAnswers; // Numero di risposte sbagliate
-let timerInterval;
-
-
-
-// FedeMaso  
-
-  timerNumber.textContent = countdown;
-}, 6000);
-}, 1000);
-
+let timerNumber = document.getElementById('timer-number')
+let countdown = 60
+let timerInterval
 
 let startTimer = function() {
-  countdown = 61;
+  countdown = 60;
 
   timerInterval = setInterval(function() {
     countdown = --countdown <= 0 ? 60 : countdown;
 
     timerNumber.textContent = countdown;
-
 
     const progress = (countdown / 60) * 100;
 
@@ -34,13 +20,8 @@ let startTimer = function() {
      
       handleAnswerSelection(); // Passa alla domanda successiva
     }
-  }, 1000);
+  }, 6000);
 };
-
-
-
-
-// FedeMaso  
 
 let feedbackIn = document.getElementById('feedback-input')
 feedbackIn.addEventListener('keydown', function(e){
@@ -49,8 +30,8 @@ feedbackIn.addEventListener('keydown', function(e){
   }
 })
 
+// FedeMaso  
 // DOMANDE 
-
 
 const questions = [
     {
@@ -152,59 +133,14 @@ const questions = [
     },
   ];
 
-
-
-
-  let timerNumber = document.getElementById('timer-number');
-let countdown = 31;
-let timerInterval;
-
-
-timerNumber.textContent = countdown;
-
-setInterval(function() {
-  countdown = --countdown <= 0 ? 31 : countdown;
-
-  timerNumber.textContent = countdown;
-}, 1000);
-
-
-let startTimer = function() {
-  countdown = 31;
-
-  timerInterval = setInterval(function() {
-    countdown = --countdown <= 0 ? 31 : countdown;
-
-    timerNumber.textContent = countdown;
-
-
-    const progress = (countdown / 31) * 100;
-
-    const timerCircle = document.getElementById('timer-circle');
-    timerCircle.style.strokeDasharray = `${progress} 100`;
-
-
-    if (countdown === 0) {
-     
-      handleTimerExpiration(); // Passa alla domanda successiva
-    }
-  }, 1000);
-};
-
-
-
-
 // Variabili
 let currentQuestionIndex = 0; // Indice della domanda corrente
 let userAnswers = []; // Array per salvare le risposte dell'utente
 let score = 0; // Inizializza il punteggio a 0
 
-
 // Funzione per mostrare la domanda corrente
 function showCurrentQuestion() {
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
-
-
   
 
   // Mostra il testo della domanda
@@ -248,8 +184,6 @@ function updateChart() {
   chart.update();
 }
 
-
-
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
   clearInterval(startTimer); // Interrompi il timer corrente
@@ -259,18 +193,6 @@ function handleAnswerSelection() {
     'input[name="answer"]:checked'
   ).value;
   userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
-
-    
-  
-
-  countdown = 31; // Resettare il countdown a 31
-
-  const selectedAnswer = document.querySelector(
-    'input[name="answer"]:checked'
-  )?.value;
-  userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
-   
-
 
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
       if (selectedAnswer === currentQuestion.correct_answer) {
