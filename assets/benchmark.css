@@ -119,6 +119,8 @@ svg {
 
 svg circle {
   stroke-dasharray: 113px;
+  stroke-dasharray: 100 100;
+  transition: stroke-dasharray 1s linear;
   stroke-dashoffset: 0px;
   stroke-linecap: round;
   stroke-width: 2px;

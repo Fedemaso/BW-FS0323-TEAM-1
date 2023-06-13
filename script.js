@@ -1,15 +1,20 @@
 let timerNumber = document.getElementById('timer-number');
-let countdown = 10;
+let countdown = 60;
 
 timerNumber.textContent = countdown;
 
 setInterval(function() {
-  countdown = --countdown <= 0 ? 10 : countdown;
+  countdown = --countdown <= 0 ? 60 : countdown;
 
   timerNumber.textContent = countdown;
-}, 1000);
-// FedeMaso  
+}, 6000);
 
+let feedbackIn = document.getElementById('feedback-input')
+feedbackIn.addEventListener('keydown', function(e){
+  if(e.key === 'Enter'){
+    // Aggiungere js per il submit del form
+  }
+})
 
 // DOMANDE 
 
@@ -208,8 +213,44 @@ function showResults() {
       if (currentQuestionIndex < questions.length) {
         showCurrentQuestion();
       } else {
-        // Se tutte le domande sono state risposte, visualizza i risultati
-        showResults();
+        // Se tutte le domande sono state risposte, apri la pagina dei risultati
+        window.location.href = "Results.html"
+        showResults()
       }
     }
+    
+ // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
+ function calculateResult() {
+  // Calcola il numero di risposte corrette
+  const correctAnswers = userAnswers.filter(
+    (answer, index) => answer === questions[index].correct_answer
+  );
+
+  // Crea l'elemento del banner dei risultati
+  const resultBanner = document.getElementById('result-banner');
+
+  // Verifica il punteggio e imposta il contenuto del banner in base al risultato
+  if (correctAnswers.length < 5) {
+    resultBanner.classList.add('fail')
+    resultBanner.textContent = "Non hai passato l'esame";
+  } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
+    resultBanner.classList.add('pass')
+    resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
+  } else {
+    resultBanner.classList.add('excellent')
+    resultBanner.textContent = "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
+  }
+
+  // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
+  const questionContainer = document.getElementById("question-container");
+  questionContainer.innerHTML = "";
+  questionContainer.appendChild(resultBanner);
+}
+
+// Mostra i risultati delle risposte dell'utente
+function showResults() {
+  console.log("Risposte dell'utente:", userAnswers);
+  calculateResult();
+}
+
     
