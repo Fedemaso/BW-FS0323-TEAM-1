@@ -8,12 +8,17 @@ body {
   background-image: url(../assets/bg.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
-  object-fit: cover;
+  object-fit: fill;
+}
+
+main {
+  text-align: center;
 }
 
 #logo {
   width: 10em;
   padding: 35px 0px 15px 0px;
+  margin-left: 10vh;
 }
 
 h1 {
@@ -87,12 +92,13 @@ li {
   font-family: 'Outfit', sans-serif;
   font-weight: bold;
   font-size: 1.5em;
-cursor:pointer;
-color:rgb(0 43 111);
+  cursor:pointer;
+  color:rgb(0 43 111);
   background-color: #00FFFF;
   box-shadow: 0px 1px 30px 0px #00FFFF;
   border: none;
 }
+
 #timer {
   position: relative;
   margin: auto;
@@ -108,7 +114,7 @@ color:rgb(0 43 111);
   line-height: 40px;
 }
 
-svg {
+#timer-svg {
   position: absolute;
   top: 0;
   right: 0;
@@ -117,7 +123,7 @@ svg {
   transform: rotateY(-180deg) rotateZ(-90deg);
 }
 
-svg circle {
+#timer-circle {
   stroke-dasharray: 113px;
   stroke-dasharray: 100 100;
   transition: stroke-dasharray 1s linear;
@@ -136,4 +142,18 @@ svg circle {
   to {
     stroke-dashoffset: 113px;
   }
+}
+
+.radio-button {
+  display: transparent;
+}
+
+.btn-container{
+  display: inline-block;
+  background-color: #900080;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  border-radius: 60px;  
+  margin: 20px;
+  padding: 10px;
 }
