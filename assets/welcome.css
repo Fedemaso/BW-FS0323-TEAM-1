@@ -50,13 +50,15 @@ main {
 
 #logo {
     width: 10em;
-    padding: 35px 0px 15px 0px;
+    margin-bottom: 2em;
 }
 
 .container {
-    height: 80vh;
-    width: 70vw;
-    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    min-height: 100vh;
+    flex-flow: column;
 }
 
 .instructions h3 {
@@ -82,7 +84,7 @@ main {
 }
 
 .bottom button {
-    margin-left: 8em;
+    margin-left: 10em;
     width: 9em;
     height: 2.5em;
 }
