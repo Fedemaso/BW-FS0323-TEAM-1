@@ -1,29 +1,28 @@
-let timerNumber = document.getElementById('timer-number')
-let countdown = 60
-let timerInterval
+let timerNumber = document.getElementById("timer-number");
+let countdown = 60;
+let timerInterval;
 
-setInterval(function() {
-countdown = --countdown <= 0 ? 60 : countdown
-timerNumber.textContent = countdown
-}, 1000)
+setInterval(function () {
+  countdown = --countdown <= 0 ? 60 : countdown;
+  timerNumber.textContent = countdown;
+}, 1000);
 
-let startTimer = function() {
-countdown = 60
+let startTimer = function () {
+  countdown = 60;
 
-timerInterval = setInterval(function() {
-  countdown = --countdown <= 0 ? 60 : countdown
+  timerInterval = setInterval(function () {
+    countdown = --countdown <= 0 ? 60 : countdown;
 
-  timerNumber.textContent = countdown
-  const progress = (countdown / 60) * 100
+    timerNumber.textContent = countdown;
+    const progress = (countdown / 60) * 100;
 
-  if (countdown === 0) {
-   
-    handleTimerExpiration() // Passa alla domanda successiva
-  }
-}, 1000)
-}
+    if (countdown === 0) {
+      handleTimerExpiration(); // Passa alla domanda successiva
+    }
+  }, 1000);
+};
 
-// DOMANDE 
+// DOMANDE
 
 const questions = [
   {
@@ -92,11 +91,7 @@ const questions = [
     question:
       "What is the code name for the mobile operating system Android 7.0?",
     correct_answer: "Nougat",
-    incorrect_answers: [
-      "Ice Cream Sandwich",
-      "Jelly Bean",
-      "Marshmallow",
-    ],
+    incorrect_answers: ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"],
   },
   {
     category: "Science: Computers",
@@ -130,56 +125,52 @@ let currentQuestionIndex = 0; // Indice della domanda corrente
 let userAnswers = []; // Array per salvare le risposte dell'utente
 let score = 0; // Inizializza il punteggio a 0
 
-
 // Funzione per mostrare la domanda corrente
 function showCurrentQuestion() {
-const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
+  const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
 
+  // Mostra il testo della domanda
+  const questionText = document.getElementById("question-text");
+  questionText.textContent = currentQuestion.question;
 
+  // Mostra le opzioni di risposta come radio button
+  const optionsContainer = document.getElementById("options-container");
+  optionsContainer.innerHTML = ""; // Rimuovi eventuali opzioni precedenti
 
+  currentQuestion.incorrect_answers.forEach((option) => {
+    const radioButton = document.createElement("input");
+    const radioButtonSgContainer = document.createElement("div"); // Contenitore opzioni singole
+    radioButtonSgContainer.classList.add("btn-container"); // Aggiunta classe per modifiche CSS
+    radioButton.type = "radio";
+    radioButton.name = "answer";
+    radioButton.classList = "radio-button";
+    radioButton.value = option;
+    optionsContainer.appendChild(radioButtonSgContainer);
+    radioButtonSgContainer.appendChild(radioButton);
 
-// Mostra il testo della domanda
-const questionText = document.getElementById("question-text");
-questionText.textContent = currentQuestion.question;
+    const optionLabel = document.createElement("label");
+    optionLabel.textContent = option;
+    radioButtonSgContainer.appendChild(optionLabel);
 
-// Mostra le opzioni di risposta come radio button
-const optionsContainer = document.getElementById("options-container");
-optionsContainer.innerHTML = ""; // Rimuovi eventuali opzioni precedenti
+    radioButtonSgContainer.appendChild(document.createElement("br"));
+  });
 
-currentQuestion.incorrect_answers.forEach((option) => {
-  const radioButton = document.createElement("input");
-  const radioButtonSgContainer = document.createElement('div') // Contenitore opzioni singole
-  radioButtonSgContainer.classList.add('btn-container') // Aggiunta classe per modifiche CSS
-  radioButton.type = "radio";
-  radioButton.name = "answer";
-  radioButton.classList = 'radio-button'
-  radioButton.value = option;
-  optionsContainer.appendChild(radioButtonSgContainer) 
-  radioButtonSgContainer.appendChild(radioButton)
+  // Aggiungi l'opzione corretta come radio button
+  const correctRadioButton = document.createElement("input");
+  const radioButtonSgContainer = document.createElement("div"); // Contenitore opzioni singole
+  radioButtonSgContainer.classList.add("btn-container"); // Aggiunta classe per modifiche CSS
+  correctRadioButton.type = "radio";
+  correctRadioButton.name = "answer";
+  correctRadioButton.classList = "radio-button";
+  correctRadioButton.value = currentQuestion.correct_answer;
+  optionsContainer.appendChild(radioButtonSgContainer);
+  radioButtonSgContainer.appendChild(correctRadioButton);
 
-  const optionLabel = document.createElement("label");
-  optionLabel.textContent = option;
-  radioButtonSgContainer.appendChild(optionLabel);
+  const correctOptionLabel = document.createElement("label");
+  correctOptionLabel.textContent = currentQuestion.correct_answer;
+  radioButtonSgContainer.appendChild(correctOptionLabel);
 
   radioButtonSgContainer.appendChild(document.createElement("br"));
-});
-
-// Aggiungi l'opzione corretta come radio button
-const correctRadioButton = document.createElement("input");
-const radioButtonSgContainer = document.createElement('div') // Contenitore opzioni singole
-radioButtonSgContainer.classList.add('btn-container') // Aggiunta classe per modifiche CSS
-correctRadioButton.type = "radio";
-correctRadioButton.name = "answer";
-correctRadioButton.classList = 'radio-button'
-correctRadioButton.value = currentQuestion.correct_answer;
-optionsContainer.appendChild(radioButtonSgContainer)
-radioButtonSgContainer.appendChild(correctRadioButton)
-
-const correctOptionLabel = document.createElement("label");
-correctOptionLabel.textContent = currentQuestion.correct_answer;
-radioButtonSgContainer.appendChild(correctOptionLabel);
-
-radioButtonSgContainer.appendChild(document.createElement("br"));
 }
 
 /* Mostra il numero della domanda
@@ -188,45 +179,42 @@ const questionIndexCounter = document.createElement('p')
 questionIndexCounter.textContent = currentQuestionIndex
 questionNumber.appendChild(currentQuestionIndex)*/
 
-
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
-clearInterval(startTimer); // Interrompi il timer corrente
-countdown = 60; // Resettare il countdown a 60
+  clearInterval(startTimer); // Interrompi il timer corrente
+  countdown = 60; // Resettare il countdown a 60
 
-const selectedAnswer = document.querySelector(
-  'input[name="answer"]:checked'
-)?.value;
-userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
- 
+  const selectedAnswer = document.querySelector(
+    'input[name="answer"]:checked'
+  )?.value;
+  userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
 
+  const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
+  if (selectedAnswer === currentQuestion.correct_answer) {
+    // Aggiungi un punto al punteggio se la risposta è corretta
+    score++;
+  }
 
-const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
-    if (selectedAnswer === currentQuestion.correct_answer) {
-      // Aggiungi un punto al punteggio se la risposta è corretta
-      score++;
-    }
-  
-    // Aggiorna il punteggio visualizzato nell'HTML
-    const scoreElement = document.getElementById("score");
-    scoreElement.textContent = score;
+  // Aggiorna il punteggio visualizzato nell'HTML
+  const scoreElement = document.getElementById("score");
+  scoreElement.textContent = score;
 
-// Passa alla domanda successiva
-currentQuestionIndex++;
-if (currentQuestionIndex < questions.length) {
-  showCurrentQuestion();
-} else {
-  // Se tutte le domande sono state risposte, apri la pagina dei risultati
-  window.location.href = "Results.html" // Redirect a fine test alla pagina dei risultati
-  showResults()
-}
+  // Passa alla domanda successiva
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showCurrentQuestion();
+  } else {
+    // Se tutte le domande sono state risposte, apri la pagina dei risultati
+    window.location.href = "Results.html"; // Redirect a fine test alla pagina dei risultati
+    showResults();
+  }
 }
 
 function handleTimerExpiration() {
-clearInterval(timerInterval); // Interrompi il timer corrente
-countdown = 60; // Reimposta il countdown a 60
+  clearInterval(timerInterval); // Interrompi il timer corrente
+  countdown = 60; // Reimposta il countdown a 60
 
-handleAnswerSelection()
+  handleAnswerSelection();
 }
 
 // Funzione per mostrare i risultati
@@ -238,46 +226,42 @@ function showResults() {
 // Mostra la prima domanda all'avvio
 showCurrentQuestion();
 
-  // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
+// Funzione per calcolare il risultato e visualizzare la pagina dei risultati
 function calculateResult() {
-// Calcola il numero di risposte corrette
-const correctAnswers = userAnswers.filter(
-  (answer, index) => answer === questions[index].correct_answer
-);
+  // Calcola il numero di risposte corrette
+  const correctAnswers = userAnswers.filter(
+    (answer, index) => answer === questions[index].correct_answer
+  );
 
-// Crea l'elemento del banner dei risultati
-const resultBanner = document.createElement("div");
-resultBanner.id = "result-banner";
+  // Crea l'elemento del banner dei risultati
+  const resultBanner = document.createElement("div");
+  resultBanner.id = "result-banner";
 
-// Verifica il punteggio e imposta il contenuto del banner in base al risultato
-if (correctAnswers.length < 5) {
-  resultBanner.className = "red";
-  resultBanner.textContent = "Non hai passato l'esame";
-} else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
-  resultBanner.className = "yellow";
-  resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
-} else {
-  resultBanner.className = "green";
-  resultBanner.textContent = "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
-}
+  // Verifica il punteggio e imposta il contenuto del banner in base al risultato
+  if (correctAnswers.length < 5) {
+    resultBanner.className = "red";
+    resultBanner.textContent = "Non hai passato l'esame";
+  } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
+    resultBanner.className = "yellow";
+    resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
+  } else {
+    resultBanner.className = "green";
+    resultBanner.textContent =
+      "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
+  }
 
-// Rimuovi il contenuto precedente e aggiungi il banner dei risultati
-const questionContainer = document.getElementById("question-container");
-questionContainer.innerHTML = "";
-questionContainer.appendChild(resultBanner);
+  // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
+  const questionContainer = document.getElementById("question-container");
+  questionContainer.innerHTML = "";
+  questionContainer.appendChild(resultBanner);
 }
 
 // Mostra i risultati delle risposte dell'utente
 function showResults() {
-console.log("Risposte dell'utente:", userAnswers);
-calculateResult();
-
+  console.log("Risposte dell'utente:", userAnswers);
+  calculateResult();
 }
 
 // Creazione del grafico
-const ctx = document.getElementById('chart').getContext('2d');
+const ctx = document.getElementById("chart").getContext("2d");
 const chart = new Chart(ctx, config);
-  
-
-
-
