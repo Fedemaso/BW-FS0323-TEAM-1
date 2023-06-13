@@ -1,28 +1,6 @@
-let timerNumber = document.getElementById("timer-number");
-let countdown = 60;
-let timerInterval;
+// // FedeMaso
 
-setInterval(function () {
-  countdown = --countdown <= 0 ? 60 : countdown;
-  timerNumber.textContent = countdown;
-}, 1000);
-
-let startTimer = function () {
-  countdown = 60;
-
-  timerInterval = setInterval(function () {
-    countdown = --countdown <= 0 ? 60 : countdown;
-
-    timerNumber.textContent = countdown;
-    const progress = (countdown / 60) * 100;
-
-    if (countdown === 0) {
-      handleTimerExpiration(); // Passa alla domanda successiva
-    }
-  }, 1000);
-};
-
-// DOMANDE
+// // DOMANDE
 
 const questions = [
   {
@@ -120,6 +98,12 @@ const questions = [
   },
 ];
 
+let timerNumber = document.getElementById("timer-number");
+let countdown = 40;
+let timerInterval;
+
+timerNumber.textContent = countdown;
+
 // Variabili
 let currentQuestionIndex = 0; // Indice della domanda corrente
 let userAnswers = []; // Array per salvare le risposte dell'utente
@@ -127,6 +111,7 @@ let score = 0; // Inizializza il punteggio a 0
 
 // Funzione per mostrare la domanda corrente
 function showCurrentQuestion() {
+  timerNumber.textContent = countdown;
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
 
   // Mostra il testo della domanda
@@ -173,21 +158,56 @@ function showCurrentQuestion() {
   radioButtonSgContainer.appendChild(document.createElement("br"));
 }
 
-/* Mostra il numero della domanda
-let questionNumber = document.getElementById('question-counter')
-const questionIndexCounter = document.createElement('p')
-questionIndexCounter.textContent = currentQuestionIndex
-questionNumber.appendChild(currentQuestionIndex)*/
+// Mostra il numero della domanda
+
+// let questionNumber = document.getElementById('question-counter')
+// const questionIndexCounter = document.createElement('p')
+// questionIndexCounter.textContent = currentQuestionIndex
+// questionNumber.appendChild(currentQuestionIndex)
 
 // Funzione per gestire la selezione di una risposta
+
 function handleAnswerSelection() {
-  clearInterval(startTimer); // Interrompi il timer corrente
-  countdown = 60; // Resettare il countdown a 60
+  countdown = 40; // Reimposta il countdown a 40
 
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
   userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
+
+  const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
+
+  if (selectedAnswer === currentQuestion.correct_answer) {
+    // Aggiungi un punto al punteggio se la risposta è corretta
+    score++;
+  }
+
+  // Aggiorna il punteggio visualizzato nell'HTML
+  const scoreElement = document.getElementById("score");
+  scoreElement.textContent = score;
+
+  // Passa alla domanda successiva
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showCurrentQuestion();
+  } else {
+    // Se tutte le domande sono state risposte, visualizza i risultati
+    clearInterval(timerInterval);
+    showResults();
+  }
+
+  if (countdown === 0) {
+    handleTimerExpiration();
+    return;
+  }
+}
+
+function handleTimerExpiration() {
+  countdown = 40; // Reimposta il countdown a 40
+  const selectedAnswer = document.querySelector(
+    'input[name="answer"]:checked'
+  )?.value;
+  userAnswers.push(null); // Aggiungi una risposta nullo per indicare che il tempo è scaduto
 
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
   if (selectedAnswer === currentQuestion.correct_answer) {
@@ -205,63 +225,73 @@ function handleAnswerSelection() {
     showCurrentQuestion();
   } else {
     // Se tutte le domande sono state risposte, apri la pagina dei risultati
+    clearInterval(timerInterval);
+
     window.location.href = "Results.html"; // Redirect a fine test alla pagina dei risultati
     showResults();
   }
-}
 
-function handleTimerExpiration() {
-  clearInterval(timerInterval); // Interrompi il timer corrente
-  countdown = 60; // Reimposta il countdown a 60
-
-  handleAnswerSelection();
-}
-
-// Funzione per mostrare i risultati
-function showResults() {
-  // Mostra i risultati delle risposte dell'utente
-  console.log("Risposte dell'utente:", userAnswers);
-}
-
-// Mostra la prima domanda all'avvio
-showCurrentQuestion();
-
-// Funzione per calcolare il risultato e visualizzare la pagina dei risultati
-function calculateResult() {
-  // Calcola il numero di risposte corrette
-  const correctAnswers = userAnswers.filter(
-    (answer, index) => answer === questions[index].correct_answer
-  );
-
-  // Crea l'elemento del banner dei risultati
-  const resultBanner = document.createElement("div");
-  resultBanner.id = "result-banner";
-
-  // Verifica il punteggio e imposta il contenuto del banner in base al risultato
-  if (correctAnswers.length < 5) {
-    resultBanner.className = "red";
-    resultBanner.textContent = "Non hai passato l'esame";
-  } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
-    resultBanner.className = "yellow";
-    resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
-  } else {
-    resultBanner.className = "green";
-    resultBanner.textContent =
-      "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
+  // Funzione per mostrare i risultati
+  function showResults() {
+    // Mostra i risultati delle risposte dell'utente
+    console.log("Risposte dell'utente:", userAnswers);
   }
 
-  // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
-  const questionContainer = document.getElementById("question-container");
-  questionContainer.innerHTML = "";
-  questionContainer.appendChild(resultBanner);
+  // Mostra la prima domanda all'avvio
+  showCurrentQuestion();
+
+  // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
+  function calculateResult() {
+    // Calcola il numero di risposte corrette
+    const correctAnswers = userAnswers.filter(
+      (answer, index) => answer === questions[index].correct_answer
+    );
+
+    // Crea l'elemento del banner dei risultati
+    const resultBanner = document.createElement("div");
+    resultBanner.id = "result-banner";
+
+    // Verifica il punteggio e imposta il contenuto del banner in base al risultato
+    if (correctAnswers.length < 5) {
+      resultBanner.className = "red";
+      resultBanner.textContent = "Non hai passato l'esame";
+    } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
+      resultBanner.className = "yellow";
+      resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
+    } else {
+      resultBanner.className = "green";
+      resultBanner.textContent =
+        "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
+    }
+
+    // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
+    const questionContainer = document.getElementById("question-container");
+    questionContainer.innerHTML = "";
+    questionContainer.appendChild(resultBanner);
+  }
+
+  // Mostra i risultati delle risposte dell'utente
+  function showResults() {
+    console.log("Risposte dell'utente:", userAnswers);
+    calculateResult();
+  }
 }
 
-// Mostra i risultati delle risposte dell'utente
-function showResults() {
-  console.log("Risposte dell'utente:", userAnswers);
-  calculateResult();
-}
+let startTimer = function () {
+  countdown = 40;
 
-// Creazione del grafico
-const ctx = document.getElementById("chart").getContext("2d");
-const chart = new Chart(ctx, config);
+  timerInterval = setInterval(function () {
+    countdown = --countdown <= -1 ? 40 : countdown;
+
+    timerNumber.textContent = countdown;
+
+    const progress = (countdown / 40) * 1000;
+    console.log(countdown);
+
+    if (countdown === 0) {
+      handleTimerExpiration(); // Passa alla domanda successiva
+    }
+  }, 1000);
+};
+
+startTimer();
