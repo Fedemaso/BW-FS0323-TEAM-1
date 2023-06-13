@@ -99,7 +99,7 @@ const questions = [
 ];
 
 let timerNumber = document.getElementById("timer-number");
-let countdown = 40;
+let countdown = 11;
 let timerInterval;
 
 timerNumber.textContent = countdown;
@@ -168,7 +168,7 @@ function showCurrentQuestion() {
 // Funzione per gestire la selezione di una risposta
 
 function handleAnswerSelection() {
-  countdown = 40; // Reimposta il countdown a 40
+  countdown = 11; // Reimposta il countdown a 31
 
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
@@ -203,7 +203,7 @@ function handleAnswerSelection() {
 }
 
 function handleTimerExpiration() {
-  countdown = 40; // Reimposta il countdown a 40
+  countdown = 11; // Reimposta il countdown a 31
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
@@ -278,14 +278,14 @@ function handleTimerExpiration() {
 }
 
 let startTimer = function () {
-  countdown = 40;
+  countdown = 11;
 
   timerInterval = setInterval(function () {
-    countdown = --countdown <= -1 ? 40 : countdown;
+    countdown = --countdown <= -1 ? 11 : countdown;
 
     timerNumber.textContent = countdown;
 
-    const progress = (countdown / 40) * 1000;
+    const progress = (countdown / 11) * 1000;
     console.log(countdown);
 
     if (countdown === 0) {
@@ -296,6 +296,6 @@ let startTimer = function () {
 
 startTimer();
 
-//Creazione del grafico
-const ctx = document.getElementById("chart").getContext("2d");
-const chart = new Chart(ctx, config);
+// // Creazione del grafico
+// const ctx = document.getElementById('chart').getContext('2d');
+// const chart = new Chart(ctx, config);
