@@ -295,3 +295,7 @@ let startTimer = function () {
 };
 
 startTimer();
+
+//Creazione del grafico
+const ctx = document.getElementById("chart").getContext("2d");
+const chart = new Chart(ctx, config);
