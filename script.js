@@ -1,7 +1,14 @@
 let timerNumber = document.getElementById('timer-number');
 let countdown = 60;
+// Dati del quiz esterno
+const totalQuestions = 6; // Numero totale di domande
+const correctAnswers = 4; // Numero di risposte corrette
+const incorrectAnswers = totalQuestions - correctAnswers; // Numero di risposte sbagliate
 
-timerNumber.textContent = countdown;
+// Calcolo delle angolazioni in radianti
+const totalAngle = 2 * Math.PI;
+const correctAngle = (correctAnswers / totalQuestions) * totalAngle;
+const incorrectAngle = (incorrectAnswers / totalQuestions) * totalAngle;
 
 setInterval(function() {
   countdown = --countdown <= 0 ? 60 : countdown;
@@ -166,23 +173,30 @@ function showCurrentQuestion() {
 
   optionsContainer.appendChild(document.createElement("br"));
 }
-
-// Funzione per gestire la selezione di una risposta
-function handleAnswerSelection() {
-  const selectedAnswer = document.querySelector(
-    'input[name="answer"]:checked'
-  ).value;
-  userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
-
-  // Passa alla domanda successiva
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    showCurrentQuestion();
-  } else {
-    // Se tutte le domande sono state risposte, visualizza i risultati
-    showResults();
-  }
+// Funzione per aggiornare il grafico con i nuovi dati
+function updateChart() {
+  config.data.datasets[0].data = [incorrectAngle, correctAngle];
+  chart.update();
 }
+
+// Configurazione iniziale del grafico
+const config = {
+  type: 'doughnut',
+  data: {
+    datasets: [{
+      data: [incorrectAngle, correctAngle],
+      backgroundColor: ['#D20094', '#00FFFF'],
+      borderWidth: 0,
+      borderAlign: 'center',
+    }],
+    labels: ['Wrong', 'Correct']
+  },
+  options: {
+    cutoutPercentage: 70, 
+    responsive: true,
+    maintainAspectRatio: false,
+  }
+};
 
 // Funzione per mostrare i risultati
 function showResults() {
@@ -254,3 +268,6 @@ function showResults() {
 }
 
     
+// Creazione del grafico
+const ctx = document.getElementById('chart').getContext('2d');
+const chart = new Chart(ctx, config);

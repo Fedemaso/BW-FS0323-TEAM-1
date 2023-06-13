@@ -103,7 +103,7 @@ li {
   }
   
   #timer-number {
-    color: black;
+    color: rgb(255, 255, 255);
     display: inline-block;
     line-height: 40px;
   }
@@ -122,7 +122,7 @@ li {
     stroke-dashoffset: 0px;
     stroke-linecap: round;
     stroke-width: 2px;
-    stroke: black;
+    stroke: rgb(255, 255, 255);
     fill: none;
     animation: countdown 10s linear infinite forwards;
   }
