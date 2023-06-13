@@ -7,25 +7,32 @@
     <link rel="stylesheet" href="assets/benchmark.css" />
   </head>
   <body>
-    <div id="timer">
-      <div id="timer-number"></div>
-      <svg>
-        <circle id="timer-circle" r="18" cx="20" cy="20"></circle>
-      </svg>
-    </div>
+    <header>
+      <img id="logo" src="assets/epicode_logo.png" alt="logo epicode" />
+      <div id="timer">
+        <div id="timer-number"></div>
+        <svg id="timer-svg">
+          <circle id="timer-circle" r="18" cx="20" cy="20"></circle>
+        </svg>
+      </div>
+    </header>
 
-    <h1>Quiz App</h1>
+    <main>
+      <h1>Quiz App</h1>
 
-    <div id="question-container">
-      <h2 id="question-text"></h2>
-      <div id="options-container"></div>
-    </div>
-
-    <button onclick="handleAnswerSelection()">Next Question</button>
-
-    <div id="score-container">
-      <h3>Score: <span id="score">0</span></h3>
-    </div>
+      <div id="question-container">
+        <h2 id="question-text"></h2>
+        <div id="options-container"></div>
+      </div>
+  
+      <button onclick="handleAnswerSelection()">Next Question</button>
+      <div id="question-counter">
+      </div>
+  
+      <div id="score-container">
+        <h3>Score: <span id="score">0</span></h3>
+      </div>
+    </main>
 
     <script src="script.js"></script>
   </body>
