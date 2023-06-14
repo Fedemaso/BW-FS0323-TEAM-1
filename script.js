@@ -298,19 +298,19 @@ let startTimer = function () {
 
 startTimer();
 
-//GRAFICO DA INSERIRE VALORI
-
-const totalQuestions = 6; // Numero totale di domande
-const correctAnswers = 4; // Numero di risposte corrette
-const incorrectAnswers = totalQuestions - correctAnswers; // Numero di risposte sbagliate
-
-// Calcolo delle angolazioni in radianti
-const totalAngle = 2 * Math.PI;
-const correctAngle = (correctAnswers / totalQuestions) * totalAngle;
-const incorrectAngle = (incorrectAnswers / totalQuestions) * totalAngle;
+// Variabili per il conteggio delle risposte corrette e sbagliate
+let correctAnswersCount = 0;
+let incorrectAnswersCount = 0;
 
 // Funzione per aggiornare il grafico con i nuovi dati
 function updateChart() {
+  const totalQuestions = questions.length; // Numero totale di domande
+  incorrectAnswersCount = totalQuestions - correctAnswersCount;
+  const totalAngle = 2 * Math.PI;
+
+  const correctAngle = (correctAnswersCount / totalQuestions) * totalAngle;
+  const incorrectAngle = (incorrectAnswersCount / totalQuestions) * totalAngle;
+
   config.data.datasets[0].data = [incorrectAngle, correctAngle];
   chart.update();
 }
@@ -320,7 +320,7 @@ const config = {
   type: 'doughnut',
   data: {
     datasets: [{
-      data: [incorrectAngle, correctAngle],
+      data: [incorrectAnswersCount, correctAnswersCount],
       backgroundColor: ['#D20094', '#00FFFF'],
       borderWidth: 0,
       borderAlign: 'center',
@@ -333,6 +333,16 @@ const config = {
     maintainAspectRatio: false,
   }
 }
+
 // Creazione del grafico
 const ctx = document.getElementById("chart").getContext("2d");
 const chart = new Chart(ctx, config);
+
+// Nel punto in cui gestisci le risposte corrette, incrementa il contatore
+if (selectedAnswer === currentQuestion.correct_answer) {
+  // Incrementa il contatore delle risposte corrette
+  correctAnswersCount++;
+}
+
+// Aggiorna il grafico con i nuovi dati
+updateChart();
