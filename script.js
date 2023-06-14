@@ -98,8 +98,10 @@ const questions = [
   },
 ];
 
+const timerCircle = document.getElementById("timer-circle");
+
 let timerNumber = document.getElementById("timer-number");
-let countdown = 10;
+let countdown = 60;
 let timerInterval;
 
 timerNumber.textContent = countdown;
@@ -109,6 +111,7 @@ let currentQuestionIndex = 0; // Indice della domanda corrente
 let userAnswers = []; // Array per salvare le risposte dell'utente
 let score = 0; // Inizializza il punteggio a 0
 
+// Funzione per aggiornare il numero della domanda visualizzata
 function updateQuestionNumber() {
   const questionNumberElement = document.getElementById("question-number");
   questionNumberElement.textContent = `Domanda ${currentQuestionIndex + 1} / ${
@@ -166,20 +169,10 @@ function showCurrentQuestion() {
   radioButtonSgContainer.appendChild(document.createElement("br"));
 }
 
-// Mostra il numero della domanda (BOZZA: ANCORA NON FUNZIONANTE)
-
-let questionNumber = document.getElementById("question-counter");
-questionNumber.classList.add("question-counter");
-const questionIndexCounter = document.createElement("p");
-questionIndexCounter.textContent = currentQuestionIndex;
-for (let i = 0; i < currentQuestionIndex.lenght; i++) {
-  questionNumber.appendChild(currentQuestionIndex[i]);
-}
-
 // Funzione per gestire la selezione di una risposta
 
 function handleAnswerSelection() {
-  countdown = 10; // Reimposta il countdown a 31
+  countdown = 60; // Reimposta il countdown a 31
 
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
@@ -215,7 +208,7 @@ function handleAnswerSelection() {
 }
 
 function handleTimerExpiration() {
-  countdown = 10; // Reimposta il countdown a 31
+  countdown = 60; // Reimposta il countdown a 10
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
@@ -245,7 +238,8 @@ function handleTimerExpiration() {
   }
 }
 
-// HO COMMENTATO QUESTE FUNZIONI IN QUANTO NON DOVREBBERO PIU SERVIRE
+// HO COMMENTATO QUESTE FUNZIONI IN QUANTO NON DOVREBBERO PIU SERVIRE, LE LASCIO IN QUANTO POTREBBERO TORNARE MEZZE UTILI PER COLLEGARE IL FOGLIO DEI RISULTATI  (fede)
+
 // // Funzione per mostrare i risultati
 // function showResults() {
 //   // Mostra i risultati delle risposte dell'utente
@@ -292,20 +286,37 @@ function handleTimerExpiration() {
 //   }
 // }
 
-let startTimer = function () {
-  countdown = 10;
+let remainingTime = 60;
 
-  timerInterval = setInterval(function () {
-    countdown = --countdown <= -1 ? 10 : countdown;
+// Calcolo dell'offset del dash del cerchio
+let circle = document.getElementById("timer-circle");
+let circumference = 2 * Math.PI * circle.getAttribute("r");
+let offset = circumference - (remainingTime / 60) * circumference;
 
-    timerNumber.textContent = "seconds \n" + countdown + "\n remaining";
+// Aggiornamento dello stile del cerchio
+circle.style.strokeDasharray = circumference;
+circle.style.strokeDashoffset = offset;
 
-    const progress = (countdown / 10) * 1000;
+// Aggiornamento del colore del cerchio in base ai secondi
+if (remainingTime <= 10) {
+  circle.style.stroke = "red";
+} else {
+  circle.style.stroke = "white";
+}
 
-    if (countdown === 0) {
-      handleTimerExpiration(); // Passa alla domanda successiva
-    }
-  }, 1000);
-};
+function startTimer() {
+  timerInterval = setInterval(updateTimer, 1000);
+}
 
+function updateTimer() {
+  countdown--;
+  timerNumber.textContent = countdown;
+
+  let progress = (countdown / 60) * circumference;
+  timerCircle.style.strokeDashoffset = progress;
+
+  if (countdown === 0) {
+    handleTimerExpiration();
+  }
+}
 startTimer();
