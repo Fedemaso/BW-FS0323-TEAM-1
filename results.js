@@ -32,8 +32,17 @@ const config = {
     cutout: 90, 
     responsive: true,
     maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false  // Nascondi il leggendario
+      },
+      tooltip: {
+        enabled: false  // Disabilita le tooltip
+      }
+    }
   }
-}
+};
+
 // Creazione del grafico
 const ctx = document.getElementById("chart").getContext("2d");
 const chart = new Chart(ctx, config);
