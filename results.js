@@ -1,6 +1,7 @@
-//Valori del grafico
-const totalQuestions = 10; // Numero totale di domande
-const correctAnswers = 3; // Numero di risposte corrette
+//GRAFICO DA INSERIRE VALORI
+
+const totalQuestions = 6; // Numero totale di domande
+const correctAnswers = 4; // Numero di risposte corrette
 const incorrectAnswers = totalQuestions - correctAnswers; // Numero di risposte sbagliate
 
 // Calcolo delle angolazioni in radianti
@@ -32,17 +33,8 @@ const config = {
     cutout: 90, 
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false  // Nascondi il leggendario
-      },
-      tooltip: {
-        enabled: false  // Disabilita le tooltip
-      }
-    }
   }
-};
-
+}
 // Creazione del grafico
 const ctx = document.getElementById("chart").getContext("2d");
 const chart = new Chart(ctx, config);
