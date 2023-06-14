@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 //Valori del grafico
+=======
+>>>>>>> Stashed changes
 const totalQuestions = 10; // Numero totale di domande
 const correctAnswers = 3; // Numero di risposte corrette
 const incorrectAnswers = totalQuestions - correctAnswers; // Numero di risposte sbagliate
