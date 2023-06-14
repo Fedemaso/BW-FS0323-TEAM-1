@@ -132,23 +132,33 @@ function showCurrentQuestion() {
   // Mostra le opzioni di risposta come radio button
   const optionsContainer = document.getElementById("options-container");
   optionsContainer.innerHTML = ""; // Rimuovi eventuali opzioni precedenti
-
   currentQuestion.incorrect_answers.forEach((option) => {
+    //Creazione elementi: radio-button, label e div
     const radioButton = document.createElement("input");
-    const radioButtonSgContainer = document.createElement("div"); // Contenitore opzioni singole
-    radioButtonSgContainer.classList.add("btn-container"); // Aggiunta classe per modifiche CSS
+    const optionLabel = document.createElement("label");
+    const radioButtonSgContainer = document.createElement("div");
+
+    //Aggiunta attributi agli elementi creati
+    //Al radio-button
     radioButton.type = "radio";
     radioButton.name = "answer";
     radioButton.classList = "radio-button";
     radioButton.value = option;
-    optionsContainer.appendChild(radioButtonSgContainer);
-    radioButtonSgContainer.appendChild(radioButton);
-
-    const optionLabel = document.createElement("label");
+    //Al div
+    radioButtonSgContainer.classList.add("btn-container");
+    //Alla label
     optionLabel.textContent = option;
-    radioButtonSgContainer.appendChild(optionLabel);
 
-    radioButtonSgContainer.appendChild(document.createElement("br"));
+    //Annidamento elementi con append, secondo la seguente struttura: 
+    //optionsContainer (vedi riga 122) > div > label + radio-button (label e radio-button sono sibligs)
+
+    optionsContainer.appendChild(radioButtonSgContainer);
+    radioButtonSgContainer.appendChild(optionLabel);
+    radioButtonSgContainer.appendChild(radioButton)
+
+    if(radioButton.checked === true){
+      radioButton.parentElement.classList.add('checked')
+    }
   });
 
   // Aggiungi l'opzione corretta come radio button

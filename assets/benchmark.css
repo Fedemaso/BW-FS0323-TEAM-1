@@ -19,7 +19,6 @@ body {
 }
 
 
-
 .container {
   height: 80vh;
   width: 70vw;
@@ -81,7 +80,11 @@ color:rgb(0 43 111);
 }
 
 .radio-button {
-  display: transparent;
+  opacity: 0;
+}
+
+.checked {
+  background-color: #00FFFF;
 }
 
 .btn-container{
