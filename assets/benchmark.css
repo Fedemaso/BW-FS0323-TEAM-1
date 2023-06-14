@@ -153,12 +153,8 @@ main {
   margin-bottom: 10vh;
 }
 
-label {
-
-}
-
 .radio-button {
-
+  opacity: 0;
 }
 
 .checked {
