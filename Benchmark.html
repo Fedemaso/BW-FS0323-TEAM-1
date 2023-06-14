@@ -12,22 +12,25 @@
       <div id="timer">
         <div id="timer-number"></div>
         <svg id="timer-svg">
-          <circle id="timer-circle" r="18" cx="20" cy="20"></circle>
+          <circle id="timer-circle" r="65" cx="55" cy="65"></circle>
         </svg>
       </div>
     </header>
 
     <main>
+      <h1>Quiz App</h1>
+
       <div id="question-container">
         <h2 id="question-text"></h2>
         <div id="options-container"></div>
       </div>
-  
-      <div id="question-counter">
-      </div>
+
+      <div id="question-counter"></div>
     </main>
     <footer>
-      <button id="nq-btn" onclick="handleAnswerSelection()">Next Question</button>
+      <button id="nq-btn" onclick="handleAnswerSelection()">
+        Next Question
+      </button>
       <div id="score-container">
         <h3>Score: <span id="score">0</span></h3>
       </div>
