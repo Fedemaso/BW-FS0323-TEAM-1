@@ -143,12 +143,16 @@ svg circle {
   opacity: 0;
 }
 
+label {
+  cursor:pointer;
+  display: inline-block;
+}
+
 .checked {
   background-color: #00FFFF;
 }
 
 .btn-container{
-  cursor:pointer;
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.091);
   width: 200px;
@@ -162,6 +166,7 @@ svg circle {
   background-color: #900080;
 }
 
+
 footer {
   position: fixed;
   left: 0;
@@ -172,7 +177,7 @@ footer {
 }
 
 #score-container{
- opacity: 0;
+  opacity: 0;
 }
 
 #nq-btn {
