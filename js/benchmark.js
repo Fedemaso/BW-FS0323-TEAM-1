@@ -1,4 +1,4 @@
-// // FedeMaso
+// // FedeMaso e GiuliaO
 
 // // DOMANDE
 
@@ -98,10 +98,8 @@ const questions = [
   },
 ];
 
-const timerCircle = document.getElementById("timer-circle");
-
 let timerNumber = document.getElementById("timer-number");
-let countdown = 60;
+let countdown = 10;
 let timerInterval;
 
 timerNumber.textContent = countdown;
@@ -111,7 +109,6 @@ let currentQuestionIndex = 0; // Indice della domanda corrente
 let userAnswers = []; // Array per salvare le risposte dell'utente
 let score = 0; // Inizializza il punteggio a 0
 
-// Funzione per aggiornare il numero della domanda visualizzata
 function updateQuestionNumber() {
   const questionNumberElement = document.getElementById("question-number");
   questionNumberElement.textContent = `Domanda ${currentQuestionIndex + 1} / ${
@@ -134,44 +131,58 @@ function showCurrentQuestion() {
   optionsContainer.innerHTML = ""; // Rimuovi eventuali opzioni precedenti
 
   currentQuestion.incorrect_answers.forEach((option) => {
+    //Creazione elementi: radio-button, label e div
     const radioButton = document.createElement("input");
-    const radioButtonSgContainer = document.createElement("div"); // Contenitore opzioni singole
-    radioButtonSgContainer.classList.add("btn-container"); // Aggiunta classe per modifiche CSS
+    const optionLabel = document.createElement("label");
+    const radioButtonSgContainer = document.createElement("div");
+
+    //Aggiunta attributi agli elementi creati
+    //Al radio-button
     radioButton.type = "radio";
     radioButton.name = "answer";
     radioButton.classList = "radio-button";
     radioButton.value = option;
-    optionsContainer.appendChild(radioButtonSgContainer);
-    radioButtonSgContainer.appendChild(radioButton);
-
-    const optionLabel = document.createElement("label");
+    //Al div
+    radioButtonSgContainer.classList.add("btn-container");
+    //Alla label
     optionLabel.textContent = option;
-    radioButtonSgContainer.appendChild(optionLabel);
 
-    radioButtonSgContainer.appendChild(document.createElement("br"));
+    //Annidamento elementi con append, secondo la seguente struttura: 
+    //optionsContainer (vedi riga 122) > label > div > radio-button
+
+    optionsContainer.appendChild(radioButtonSgContainer);
+    radioButtonSgContainer.appendChild(optionLabel);
+    optionLabel.appendChild(radioButton)
   });
 
-  // Aggiungi l'opzione corretta come radio button
+  //Aggiungi l'opzione corretta come radio button
+
+  //Creazione elementi: radio-button, label e div
   const correctRadioButton = document.createElement("input");
-  const radioButtonSgContainer = document.createElement("div"); // Contenitore opzioni singole
-  radioButtonSgContainer.classList.add("btn-container"); // Aggiunta classe per modifiche CSS
+  const correctOptionLabel = document.createElement("label");
+  const radioButtonSgContainer = document.createElement("div");
+
+  //Aggiunta attributi agli elementi creati
+  //Al radio-button
   correctRadioButton.type = "radio";
   correctRadioButton.name = "answer";
   correctRadioButton.classList = "radio-button";
   correctRadioButton.value = currentQuestion.correct_answer;
-  optionsContainer.appendChild(radioButtonSgContainer);
-  radioButtonSgContainer.appendChild(correctRadioButton);
-
-  const correctOptionLabel = document.createElement("label");
+  //Al div
+  radioButtonSgContainer.classList.add("btn-container");
+  //Alla label
   correctOptionLabel.textContent = currentQuestion.correct_answer;
-  radioButtonSgContainer.appendChild(correctOptionLabel);
 
-  radioButtonSgContainer.appendChild(document.createElement("br"));
+  //Annidamento elementi con append, secondo la seguente struttura: 
+  //optionsContainer (vedi riga 122) > label > div > radio-button
+  optionsContainer.appendChild(radioButtonSgContainer);
+  radioButtonSgContainer.appendChild(correctOptionLabel);
+  correctOptionLabel.appendChild(correctRadioButton);
 }
 
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
-  countdown = 60; // Reimposta il countdown a 31
+  countdown = 10; // Reimposta il countdown a 31
 
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
@@ -207,7 +218,7 @@ function handleAnswerSelection() {
 }
 
 function handleTimerExpiration() {
-  countdown = 60; // Reimposta il countdown a 10
+  countdown = 10; // Reimposta il countdown a 31
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
@@ -237,8 +248,7 @@ function handleTimerExpiration() {
   }
 }
 
-// HO COMMENTATO QUESTE FUNZIONI IN QUANTO NON DOVREBBERO PIU SERVIRE, LE LASCIO IN QUANTO POTREBBERO TORNARE MEZZE UTILI PER COLLEGARE IL FOGLIO DEI RISULTATI  (fede)
-
+// HO COMMENTATO QUESTE FUNZIONI IN QUANTO NON DOVREBBERO PIU SERVIRE
 // // Funzione per mostrare i risultati
 // function showResults() {
 //   // Mostra i risultati delle risposte dell'utente
@@ -285,37 +295,20 @@ function handleTimerExpiration() {
 //   }
 // }
 
-let remainingTime = 60;
+let startTimer = function () {
+  countdown = 10;
 
-// Calcolo dell'offset del dash del cerchio
-let circle = document.getElementById("timer-circle");
-let circumference = 2 * Math.PI * circle.getAttribute("r");
-let offset = circumference - (remainingTime / 60) * circumference;
+  timerInterval = setInterval(function () {
+    countdown = --countdown <= -1 ? 10 : countdown;
 
-// Aggiornamento dello stile del cerchio
-circle.style.strokeDasharray = circumference;
-circle.style.strokeDashoffset = offset;
+    timerNumber.textContent = "seconds \n" + countdown + "\n remaining";
 
-// Aggiornamento del colore del cerchio in base ai secondi
-if (remainingTime <= 10) {
-  circle.style.stroke = "red";
-} else {
-  circle.style.stroke = "white";
-}
+    const progress = (countdown / 10) * 1000;
 
-function startTimer() {
-  timerInterval = setInterval(updateTimer, 1000);
-}
+    if (countdown === 0) {
+      handleTimerExpiration(); // Passa alla domanda successiva
+    }
+  }, 1000);
+};
 
-function updateTimer() {
-  countdown--;
-  timerNumber.textContent = countdown;
-
-  let progress = (countdown / 60) * circumference;
-  timerCircle.style.strokeDashoffset = progress;
-
-  if (countdown === 0) {
-    handleTimerExpiration();
-  }
-}
 startTimer();
