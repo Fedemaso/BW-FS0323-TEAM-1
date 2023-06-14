@@ -109,6 +109,14 @@ let currentQuestionIndex = 0; // Indice della domanda corrente
 let userAnswers = []; // Array per salvare le risposte dell'utente
 let score = 0; // Inizializza il punteggio a 0
 
+function updateQuestionNumber() {
+  const questionNumberElement = document.getElementById("question-number");
+  questionNumberElement.textContent = `Domanda ${currentQuestionIndex + 1} / ${
+    questions.length
+  }`;
+}
+updateQuestionNumber();
+
 // Funzione per mostrare la domanda corrente
 function showCurrentQuestion() {
   timerNumber.textContent = countdown;
@@ -170,12 +178,12 @@ function showCurrentQuestion() {
 
 // Mostra il numero della domanda (BOZZA: ANCORA NON FUNZIONANTE)
 
-let questionNumber = document.getElementById('question-counter')
-questionNumber.classList.add('question-counter')
-const questionIndexCounter = document.createElement('p')
-questionIndexCounter.textContent = currentQuestionIndex
-for(let i=0; i<currentQuestionIndex.lenght; i++){
-  questionNumber.appendChild(currentQuestionIndex[i])
+let questionNumber = document.getElementById("question-counter");
+questionNumber.classList.add("question-counter");
+const questionIndexCounter = document.createElement("p");
+questionIndexCounter.textContent = currentQuestionIndex;
+for (let i = 0; i < currentQuestionIndex.lenght; i++) {
+  questionNumber.appendChild(currentQuestionIndex[i]);
 }
 
 // Funzione per gestire la selezione di una risposta
@@ -202,6 +210,7 @@ function handleAnswerSelection() {
   // Passa alla domanda successiva
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
+    updateQuestionNumber(); // Aggiorna il numero della domanda corrente
     showCurrentQuestion();
   } else {
     // Se tutte le domande sono state risposte, visualizza i risultati
@@ -235,6 +244,7 @@ function handleTimerExpiration() {
   // Passa alla domanda successiva
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
+    updateQuestionNumber(); // Aggiorna il numero della domanda corrente
     showCurrentQuestion();
   } else {
     // Se tutte le domande sono state risposte, apri la pagina dei risultati
@@ -243,52 +253,54 @@ function handleTimerExpiration() {
     window.location.href = "Results.html"; // Redirect a fine test alla pagina dei risultati
     showResults();
   }
-
-  // Funzione per mostrare i risultati
-  function showResults() {
-    // Mostra i risultati delle risposte dell'utente
-    console.log("Risposte dell'utente:", userAnswers);
-  }
-
-  // Mostra la prima domanda all'avvio
-  showCurrentQuestion();
-
-  // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
-  function calculateResult() {
-    // Calcola il numero di risposte corrette
-    const correctAnswers = userAnswers.filter(
-      (answer, index) => answer === questions[index].correct_answer
-    );
-
-    // Crea l'elemento del banner dei risultati
-    const resultBanner = document.createElement("div");
-    resultBanner.id = "result-banner";
-
-    // Verifica il punteggio e imposta il contenuto del banner in base al risultato
-    if (correctAnswers.length < 5) {
-      resultBanner.className = "red";
-      resultBanner.textContent = "Non hai passato l'esame";
-    } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
-      resultBanner.className = "yellow";
-      resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
-    } else {
-      resultBanner.className = "green";
-      resultBanner.textContent =
-        "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
-    }
-
-    // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
-    const questionContainer = document.getElementById("question-container");
-    questionContainer.innerHTML = "";
-    questionContainer.appendChild(resultBanner);
-  }
-
-  // Mostra i risultati delle risposte dell'utente
-  function showResults() {
-    console.log("Risposte dell'utente:", userAnswers);
-    calculateResult();
-  }
 }
+
+// HO COMMENTATO QUESTE FUNZIONI IN QUANTO NON DOVREBBERO PIU SERVIRE
+// // Funzione per mostrare i risultati
+// function showResults() {
+//   // Mostra i risultati delle risposte dell'utente
+//   console.log("Risposte dell'utente:", userAnswers);
+// }
+
+// // Mostra la prima domanda all'avvio
+// showCurrentQuestion();
+
+// // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
+// function calculateResult() {
+//   // Calcola il numero di risposte corrette
+//   const correctAnswers = userAnswers.filter(
+//     (answer, index) => answer === questions[index].correct_answer
+//   );
+
+//   // Crea l'elemento del banner dei risultati
+//   const resultBanner = document.createElement("div");
+//   resultBanner.id = "result-banner";
+
+//   // Verifica il punteggio e imposta il contenuto del banner in base al risultato
+//   if (correctAnswers.length < 5) {
+//     resultBanner.className = "red";
+//     resultBanner.textContent = "Non hai passato l'esame";
+//   } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
+//     resultBanner.className = "yellow";
+//     resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
+//   } else {
+//     resultBanner.className = "green";
+//     resultBanner.textContent =
+//       "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
+//   }
+
+//   // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
+//   const questionContainer = document.getElementById("question-container");
+//   questionContainer.innerHTML = "";
+//   questionContainer.appendChild(resultBanner);
+// }
+
+//   // Mostra i risultati delle risposte dell'utente
+//   function showResults() {
+//     console.log("Risposte dell'utente:", userAnswers);
+//     calculateResult();
+//   }
+// }
 
 let startTimer = function () {
   countdown = 10;
@@ -296,7 +308,7 @@ let startTimer = function () {
   timerInterval = setInterval(function () {
     countdown = --countdown <= -1 ? 10 : countdown;
 
-    timerNumber.textContent = 'seconds \n' + countdown + '\n remaining';
+    timerNumber.textContent = "seconds \n" + countdown + "\n remaining";
 
     const progress = (countdown / 10) * 1000;
 
@@ -307,7 +319,3 @@ let startTimer = function () {
 };
 
 startTimer();
-
-// Creazione del grafico
-const ctx = document.getElementById("chart").getContext("2d");
-const chart = new Chart(ctx, config);

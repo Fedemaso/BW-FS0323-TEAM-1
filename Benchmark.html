@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Benchmark</title>
     <link rel="stylesheet" href="assets/benchmark.css" />
+
+    <style>
+      #timer-circle {
+        stroke-dasharray: 100 100;
+        transition: stroke-dasharray 1s linear;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -29,6 +36,7 @@
       <button id="nq-btn" onclick="handleAnswerSelection()">
         Next Question
       </button>
+      <div id="question-number"></div>
       <div id="score-container">
         <h3>Score: <span id="score">0</span></h3>
       </div>
