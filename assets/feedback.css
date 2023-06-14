@@ -64,24 +64,22 @@ main {
     margin: 30px 0px 50px 0px;
 }
 
-.starSvg {
-    font-size: 1.3em;
+.rating img {
+    height: 3em;
     cursor: pointer;
-    transition: filter linear .3s;
+    transition: all 0.8s;
+    margin: 4px;
 }
- 
-.starSvg:hover {
+
+.starActive {
+    content: url('../assets/star.svg');
+}
+
+.starInactive:hover {
+    content: url('../assets/star.svg');
     filter: drop-shadow(1px 1px 4px #00FFFF);
     transform: scale(1.2);
 }
-
-.rating-star img {
-    font-size: 4em;
-    color: #fff;
-    text-decoration: none;
-    transition: all 0.5s;
-    margin: 4px;
-  }
 
 /* FEEDBACK */
 
@@ -95,7 +93,6 @@ main {
     background: transparent;
     border: none;
 }
-
 
 /* HORIZONTAL RULE */
 
