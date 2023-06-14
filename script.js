@@ -99,7 +99,7 @@ const questions = [
 ];
 
 let timerNumber = document.getElementById("timer-number");
-let countdown = 11;
+let countdown = 10;
 let timerInterval;
 
 timerNumber.textContent = countdown;
@@ -158,17 +158,20 @@ function showCurrentQuestion() {
   radioButtonSgContainer.appendChild(document.createElement("br"));
 }
 
-// Mostra il numero della domanda
+// Mostra il numero della domanda (BOZZA: ANCORA NON FUNZIONANTE)
 
-// let questionNumber = document.getElementById('question-counter')
-// const questionIndexCounter = document.createElement('p')
-// questionIndexCounter.textContent = currentQuestionIndex
-// questionNumber.appendChild(currentQuestionIndex)
+let questionNumber = document.getElementById('question-counter')
+questionNumber.classList.add('question-counter')
+const questionIndexCounter = document.createElement('p')
+questionIndexCounter.textContent = currentQuestionIndex
+for(let i=0; i<currentQuestionIndex.lenght; i++){
+  questionNumber.appendChild(currentQuestionIndex[i])
+}
 
 // Funzione per gestire la selezione di una risposta
 
 function handleAnswerSelection() {
-  countdown = 11; // Reimposta il countdown a 31
+  countdown = 10; // Reimposta il countdown a 31
 
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
@@ -203,7 +206,7 @@ function handleAnswerSelection() {
 }
 
 function handleTimerExpiration() {
-  countdown = 11; // Reimposta il countdown a 31
+  countdown = 10; // Reimposta il countdown a 31
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
@@ -278,15 +281,14 @@ function handleTimerExpiration() {
 }
 
 let startTimer = function () {
-  countdown = 11;
+  countdown = 10;
 
   timerInterval = setInterval(function () {
-    countdown = --countdown <= -1 ? 11 : countdown;
+    countdown = --countdown <= -1 ? 10 : countdown;
 
-    timerNumber.textContent = countdown;
+    timerNumber.textContent = 'seconds \n' + countdown + '\n remaining';
 
-    const progress = (countdown / 11) * 1000;
-    console.log(countdown);
+    const progress = (countdown / 10) * 1000;
 
     if (countdown === 0) {
       handleTimerExpiration(); // Passa alla domanda successiva
@@ -296,6 +298,6 @@ let startTimer = function () {
 
 startTimer();
 
-// // Creazione del grafico
-// const ctx = document.getElementById('chart').getContext('2d');
-// const chart = new Chart(ctx, config);
+// Creazione del grafico
+const ctx = document.getElementById("chart").getContext("2d");
+const chart = new Chart(ctx, config);
