@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;300;400;600;700&display=swap');
+
 /* IMPOSTAZIONI GENERALI */
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 1em;
   line-height: 1.25;
   color:white;
@@ -11,41 +13,31 @@ body {
   object-fit: fill;
 }
 
-main {
-  text-align: center;
-}
-
 #logo {
   width: 10em;
   padding: 35px 0px 15px 0px;
   margin-left: 10vh;
 }
 
-
-.container {
-  height: 80vh;
-  width: 70vw;
-}
-
 .myButton {
   font-family: 'Outfit', sans-serif;
   font-weight: bold;
   font-size: 1.5em;
-  cursor:pointer;
-  color:rgb(0 43 111);
+cursor:pointer;
+color:rgb(0 43 111);
   background-color: #00FFFF;
   box-shadow: 0px 1px 30px 0px #00FFFF;
   border: none;
 }
 
+/*
 #timer {
   position: absolute;
-  top: 20px;
-  right: 10px;
+  top: 40px;
+  right: 40px;
   margin: auto;
-  margin-top: 50px;
-  margin-right: 50px;
-  height: 40px;
+  margin-top: 100px;
+  height: 50px;
   width: 40px;
   text-align: center;
 }
@@ -53,10 +45,11 @@ main {
 #timer-number {
   color: white;
   display: inline-block;
-  line-height: 40px;
+  line-height: 6em;
+  font-size: 0.1em;
 }
 
-#timer-svg {
+svg {
   position: absolute;
   top: 0;
   right: 0;
@@ -65,61 +58,87 @@ main {
   transform: rotateY(-180deg) rotateZ(-90deg);
 }
 
-#timer-circle {
+svg circle {
   stroke-dasharray: 113px;
-  stroke-dasharray: 100 100;
-  transition: stroke-dasharray 1s linear;
   stroke-dashoffset: 0px;
   stroke-linecap: round;
   stroke-width: 2px;
-  stroke: white;
+  stroke: #00FFFF;
   fill: none;
   animation: countdown 60s linear infinite forwards;
+} */
+
+
+#timer {
+  position: fixed;
+  top: 100px;
+  right: 170px;
+  width: 150px;
+  height: 150px;
 }
 
-@keyframes countdown {
-  from {
-    stroke-dashoffset: 0px;
-  }
-  to {
-    stroke-dashoffset: 113px;
-  }
+#timer-svg {
+  width: 100%;
+  height: 100%;
+}
+
+#timer-circle {
+  fill: none;
+  stroke-width: 10;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 1s linear;
+}
+
+#timer-number {
+  fill: white;
+  font-size: 68px;
+  text-anchor: middle;
+  dominant-baseline: middle;
 }
 
 #question-container{
   min-width: 500;
   width: 700px;
   text-align: center;
-  margin: 0 auto;
+  margin: 250px auto;
 }
 
 #question-text {
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 1.8em;
   font-weight: 400;
+  line-height: 1em;
+  margin-bottom: 10vh;
 }
 
 .radio-button {
-  display: transparent;
+  opacity: 0;
+}
+
+label {
+  cursor:pointer;
+  display: inline-block;
+}
+
+.checked {
+  background-color: #00FFFF;
 }
 
 .btn-container{
-  cursor:pointer;
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.091);
   width: 200px;
-  border-radius: 70px;  
-  border: 2px solid white;
+  border-radius: 70px;
   margin: 20px;
   padding: 10px;
-  border:linear-gradient(138deg, #ffffff 0%, transparent 100%);
-border-radius: 30px;
-padding: 6px;
-box-sizing: border-box;;
+  box-shadow: 0px -2px 3px 0px #ffffffdf;
 }
 
 .btn-container:hover{
   background-color: #900080;
 }
+
 
 footer {
   position: fixed;
@@ -127,22 +146,27 @@ footer {
   bottom: 0;
   width: 100%;
   height: 30%;
+  text-align: center;
 }
 
 #score-container{
-  text-align: center;
-  margin-top: 8%;
+  opacity: 0;
 }
 
 #nq-btn {
 cursor:pointer;
 padding: 10px;
 width: 200px;
-border-radius: 70px; 
-font-weight: 700; 
+border-radius: 70px;
+font-weight: 700;
 color:rgb(0 43 111);
-  background-color: #00FFFF;
-  box-shadow: 0px 1px 30px 0px #00FFFF;
-  border: none;
-margin-left: 70%;
+background-color: #00FFFF;
+box-shadow: 0px 1px 30px 0px #00FFFF;
+border: none;
+margin-top: 10%;
+}
+
+#question-number {
+  margin-top: 2%;
+  font-size: 1.4em;
 }

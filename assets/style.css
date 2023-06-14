@@ -97,8 +97,8 @@ li {
     position: relative;
     margin: auto;
     margin-top: 100px;
-    height: 40px;
-    width: 40px;
+    height: 70px;
+    width: 70px;
     text-align: center;
   }
   
@@ -106,6 +106,7 @@ li {
     color: rgb(255, 255, 255);
     display: inline-block;
     line-height: 40px;
+    font-size: 1.5em;
   }
   
   svg {
