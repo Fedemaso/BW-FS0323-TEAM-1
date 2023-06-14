@@ -30,43 +30,6 @@ color:rgb(0 43 111);
   border: none;
 }
 
-/*
-#timer {
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  margin: auto;
-  margin-top: 100px;
-  height: 50px;
-  width: 40px;
-  text-align: center;
-}
-
-#timer-number {
-  color: white;
-  display: inline-block;
-  line-height: 6em;
-  font-size: 0.1em;
-}
-
-svg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  transform: rotateY(-180deg) rotateZ(-90deg);
-}
-
-svg circle {
-  stroke-dasharray: 113px;
-  stroke-dashoffset: 0px;
-  stroke-linecap: round;
-  stroke-width: 2px;
-  stroke: #00FFFF;
-  fill: none;
-  animation: countdown 60s linear infinite forwards;
-} */
 
 
 #timer {
@@ -149,9 +112,9 @@ footer {
   text-align: center;
 }
 
-#score-container{
+/* #score-container{
   opacity: 0;
-}
+} */
 
 #nq-btn {
 cursor:pointer;

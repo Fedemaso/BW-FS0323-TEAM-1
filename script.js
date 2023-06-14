@@ -242,7 +242,7 @@ function handleTimerExpiration() {
 // // Funzione per mostrare i risultati
 // function showResults() {
 //   // Mostra i risultati delle risposte dell'utente
-//   
+//
 // }
 
 // // Mostra la prima domanda all'avvio
@@ -280,17 +280,17 @@ function handleTimerExpiration() {
 
 //   // Mostra i risultati delle risposte dell'utente
 //   function showResults() {
-//     
+//
 //     calculateResult();
 //   }
 // }
 
-let remainingTime = 60;
+var remainingTime = 60;
 
 // Calcolo dell'offset del dash del cerchio
-let circle = document.getElementById("timer-circle");
-let circumference = 2 * Math.PI * circle.getAttribute("r");
-let offset = circumference - (remainingTime / 60) * circumference;
+var circle = document.getElementById("timer-circle");
+var circumference = 2 * Math.PI * circle.getAttribute("r");
+var offset = circumference - (remainingTime / 60) * circumference;
 
 // Aggiornamento dello stile del cerchio
 circle.style.strokeDasharray = circumference;
@@ -300,7 +300,7 @@ circle.style.strokeDashoffset = offset;
 if (remainingTime <= 10) {
   circle.style.stroke = "red";
 } else {
-  circle.style.stroke = "white";
+  circle.style.stroke = "#1b38da";
 }
 
 function startTimer() {

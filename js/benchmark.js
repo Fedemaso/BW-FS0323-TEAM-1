@@ -97,9 +97,9 @@ const questions = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
-
+const timerCircle = document.getElementById("timer-circle");
 let timerNumber = document.getElementById("timer-number");
-let countdown = 10;
+let countdown = 60;
 let timerInterval;
 
 timerNumber.textContent = countdown;
@@ -147,12 +147,12 @@ function showCurrentQuestion() {
     //Alla label
     optionLabel.textContent = option;
 
-    //Annidamento elementi con append, secondo la seguente struttura: 
+    //Annidamento elementi con append, secondo la seguente struttura:
     //optionsContainer (vedi riga 122) > label > div > radio-button
 
     optionsContainer.appendChild(radioButtonSgContainer);
     radioButtonSgContainer.appendChild(optionLabel);
-    optionLabel.appendChild(radioButton)
+    optionLabel.appendChild(radioButton);
   });
 
   //Aggiungi l'opzione corretta come radio button
@@ -173,7 +173,7 @@ function showCurrentQuestion() {
   //Alla label
   correctOptionLabel.textContent = currentQuestion.correct_answer;
 
-  //Annidamento elementi con append, secondo la seguente struttura: 
+  //Annidamento elementi con append, secondo la seguente struttura:
   //optionsContainer (vedi riga 122) > label > div > radio-button
   optionsContainer.appendChild(radioButtonSgContainer);
   radioButtonSgContainer.appendChild(correctOptionLabel);
@@ -182,7 +182,7 @@ function showCurrentQuestion() {
 
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
-  countdown = 10; // Reimposta il countdown a 31
+  countdown = 60; // Reimposta il countdown a 60
 
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
@@ -218,7 +218,7 @@ function handleAnswerSelection() {
 }
 
 function handleTimerExpiration() {
-  countdown = 10; // Reimposta il countdown a 31
+  countdown = 60; // Reimposta il countdown a 60
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
@@ -252,7 +252,7 @@ function handleTimerExpiration() {
 // // Funzione per mostrare i risultati
 // function showResults() {
 //   // Mostra i risultati delle risposte dell'utente
-//   
+//
 // }
 
 // // Mostra la prima domanda all'avvio
@@ -290,25 +290,42 @@ function handleTimerExpiration() {
 
 //   // Mostra i risultati delle risposte dell'utente
 //   function showResults() {
-//     
+//
 //     calculateResult();
 //   }
 // }
 
-let startTimer = function () {
-  countdown = 10;
+var remainingTime = 60;
 
-  timerInterval = setInterval(function () {
-    countdown = --countdown <= -1 ? 10 : countdown;
+// Calcolo dell'offset del dash del cerchio
+var circle = document.getElementById("timer-circle");
+var circumference = 2 * Math.PI * circle.getAttribute("r");
+var offset = circumference - (remainingTime / 60) * circumference;
 
-    timerNumber.textContent = "seconds \n" + countdown + "\n remaining";
+// Aggiornamento dello stile del cerchio
+circle.style.strokeDasharray = circumference;
+circle.style.strokeDashoffset = offset;
 
-    const progress = (countdown / 10) * 1000;
+// Aggiornamento del colore del cerchio in base ai secondi
+if (remainingTime <= 10) {
+  circle.style.stroke = "red";
+} else {
+  circle.style.stroke = "#1b38da";
+}
 
-    if (countdown === 0) {
-      handleTimerExpiration(); // Passa alla domanda successiva
-    }
-  }, 1000);
-};
+function startTimer() {
+  timerInterval = setInterval(updateTimer, 1000);
+}
 
+function updateTimer() {
+  countdown--;
+  timerNumber.textContent = countdown;
+
+  let progress = (countdown / 60) * circumference;
+  timerCircle.style.strokeDashoffset = progress;
+
+  if (countdown === 0) {
+    handleTimerExpiration();
+  }
+}
 startTimer();
