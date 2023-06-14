@@ -129,33 +129,23 @@ function showCurrentQuestion() {
   // Mostra le opzioni di risposta come radio button
   const optionsContainer = document.getElementById("options-container");
   optionsContainer.innerHTML = ""; // Rimuovi eventuali opzioni precedenti
-  currentQuestion.incorrect_answers.forEach((option) => {
-    //Creazione elementi: radio-button, label e div
-    const radioButton = document.createElement("input");
-    const optionLabel = document.createElement("label");
-    const radioButtonSgContainer = document.createElement("div");
 
-    //Aggiunta attributi agli elementi creati
-    //Al radio-button
+  currentQuestion.incorrect_answers.forEach((option) => {
+    const radioButton = document.createElement("input");
+    const radioButtonSgContainer = document.createElement("div"); // Contenitore opzioni singole
+    radioButtonSgContainer.classList.add("btn-container"); // Aggiunta classe per modifiche CSS
     radioButton.type = "radio";
     radioButton.name = "answer";
     radioButton.classList = "radio-button";
     radioButton.value = option;
-    //Al div
-    radioButtonSgContainer.classList.add("btn-container");
-    //Alla label
-    optionLabel.textContent = option;
-
-    //Annidamento elementi con append, secondo la seguente struttura: 
-    //optionsContainer (vedi riga 122) > div > label + radio-button (label e radio-button sono sibligs)
-
     optionsContainer.appendChild(radioButtonSgContainer);
-    radioButtonSgContainer.appendChild(optionLabel);
-    radioButtonSgContainer.appendChild(radioButton)
+    radioButtonSgContainer.appendChild(radioButton);
 
-    if(radioButton.checked === true){
-      radioButton.parentElement.classList.add('checked')
-    }
+    const optionLabel = document.createElement("label");
+    optionLabel.textContent = option;
+    radioButtonSgContainer.appendChild(optionLabel);
+
+    radioButtonSgContainer.appendChild(document.createElement("br"));
   });
 
   // Aggiungi l'opzione corretta come radio button
@@ -176,18 +166,7 @@ function showCurrentQuestion() {
   radioButtonSgContainer.appendChild(document.createElement("br"));
 }
 
-// Mostra il numero della domanda (BOZZA: ANCORA NON FUNZIONANTE)
-
-let questionNumber = document.getElementById("question-counter");
-questionNumber.classList.add("question-counter");
-const questionIndexCounter = document.createElement("p");
-questionIndexCounter.textContent = currentQuestionIndex;
-for (let i = 0; i < currentQuestionIndex.lenght; i++) {
-  questionNumber.appendChild(currentQuestionIndex[i]);
-}
-
 // Funzione per gestire la selezione di una risposta
-
 function handleAnswerSelection() {
   countdown = 10; // Reimposta il countdown a 31
 
@@ -259,7 +238,7 @@ function handleTimerExpiration() {
 // // Funzione per mostrare i risultati
 // function showResults() {
 //   // Mostra i risultati delle risposte dell'utente
-//   console.log("Risposte dell'utente:", userAnswers);
+//   
 // }
 
 // // Mostra la prima domanda all'avvio
@@ -297,7 +276,7 @@ function handleTimerExpiration() {
 
 //   // Mostra i risultati delle risposte dell'utente
 //   function showResults() {
-//     console.log("Risposte dell'utente:", userAnswers);
+//     
 //     calculateResult();
 //   }
 // }
