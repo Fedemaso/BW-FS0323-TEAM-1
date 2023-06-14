@@ -1,5 +1,8 @@
 
-const ratingStars = [...document.getElementsByClassName("starSvg")];
+const ratingStars = Array.from(document.getElementsByClassName('starSvg'))
+
+console.log(ratingStars);
+
 
 function executeRating(stars) {
     const starClassActive = "starSvg"
@@ -21,7 +24,7 @@ function executeRating(stars) {
 
 executeRating(ratingStars)
 
-console.log(ratingStars);
+
 // let feedbackIn = document.getElementById('feedback-input')
 // feedbackIn.addEventListener('keydown', function(e){
 //   if(e.key === 'Enter'){
