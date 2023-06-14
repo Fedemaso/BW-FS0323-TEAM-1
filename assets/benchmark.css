@@ -24,7 +24,6 @@ main {
 }
 
 
-
 .container {
   height: 80vh;
   width: 70vw;
@@ -154,8 +153,16 @@ main {
   margin-bottom: 10vh;
 }
 
+label {
+
+}
+
 .radio-button {
-  display: transparent;
+
+}
+
+.checked {
+  background-color: #00FFFF;
 }
 
 .btn-container{
