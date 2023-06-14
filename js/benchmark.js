@@ -295,22 +295,20 @@ function handleTimerExpiration() {
 //   }
 // }
 
-var remainingTime = 60;
-
 // Calcolo dell'offset del dash del cerchio
-var circle = document.getElementById("timer-circle");
-var circumference = 2 * Math.PI * circle.getAttribute("r");
-var offset = circumference - (remainingTime / 60) * circumference;
+let circle = document.getElementById("timer-circle");
+let circumference = 2 * Math.PI * circle.getAttribute("r");
+let offset = circumference - (countdown / 60) * circumference;
 
 // Aggiornamento dello stile del cerchio
 circle.style.strokeDasharray = circumference;
 circle.style.strokeDashoffset = offset;
 
 // Aggiornamento del colore del cerchio in base ai secondi
-if (remainingTime <= 10) {
+if (countdown <= 10) {
   circle.style.stroke = "red";
 } else {
-  circle.style.stroke = "#1b38da";
+  circle.style.stroke = "#a11ff3";
 }
 
 function startTimer() {
@@ -322,10 +320,11 @@ function updateTimer() {
   timerNumber.textContent = countdown;
 
   let progress = (countdown / 60) * circumference;
-  timerCircle.style.strokeDashoffset = progress;
+  circle.style.strokeDashoffset = circumference - progress;
 
   if (countdown === 0) {
     handleTimerExpiration();
   }
 }
+
 startTimer();
