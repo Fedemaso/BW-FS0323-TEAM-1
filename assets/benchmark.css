@@ -125,7 +125,11 @@ border: none;
 margin-top: 5%;
 }
 
-#question-number {
+#qn-div {
   margin: 4%;
   font-size: 1.4em;
+}
+
+#total-qn {
+  color: #900080;
 }
