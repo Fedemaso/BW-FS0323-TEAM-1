@@ -229,6 +229,7 @@ function handleAnswerSelection() {
   if (selectedAnswer === currentQuestion.correct_answer) {
     // Aggiungi un punto al punteggio se la risposta è corretta
     score++;
+    localStorage.setItem('result', score) // Memorizzazione valore nel localStorage
   }
 
   // Aggiorna il punteggio visualizzato nell'HTML
