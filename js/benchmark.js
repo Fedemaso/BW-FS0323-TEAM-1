@@ -206,7 +206,6 @@ function addClasstoRBParent() {
   let checked_RB = document.querySelector('input[name="answer"]:checked');
   if(checked_RB != null){
   checked_RB.parentElement.parentElement.classList.toggle('checked')
-  alert(checked_RB.value);
   console.log(checked_RB.parentElement.parentElement)
   }
 }
@@ -237,27 +236,6 @@ function handleAnswerSelection() {
   scoreElement.textContent = score;
 
   nextQuestion();
-}
-
-// Funzione per gestire lo scadere del tempo
-function handleTimerExpiration() {
-  countdown = 60; // Reimposta il countdown a 60
-  const selectedAnswer = document.querySelector(
-    'input[name="answer"]:checked'
-  )?.value;
-  userAnswers.push(null); // Aggiungi una risposta nullo per indicare che il tempo è scaduto
-
-  const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
-  if (selectedAnswer === currentQuestion.correct_answer) {
-    // Aggiungi un punto al punteggio se la risposta è corretta
-    score++;
-  }
-
-  // Aggiorna il punteggio visualizzato nell'HTML
-  const scoreElement = document.getElementById("score");
-  scoreElement.textContent = score;
-
-  nextQuestion()
 }
 
 // TIMER 
