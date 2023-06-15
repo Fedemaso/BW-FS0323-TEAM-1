@@ -38,3 +38,9 @@ const config = {
 // Creazione del grafico
 const ctx = document.getElementById("chart").getContext("2d");
 const chart = new Chart(ctx, config);
+
+const validate = () => {
+  if (document.getElementById('policy').checked) {
+      window.location.href = "Benchmark.html";
+  } else alert ("Mark the checkbox to continue")
+}
