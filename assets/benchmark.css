@@ -50,12 +50,12 @@ header {
 #timer-circle-static {
   fill: none;
   stroke:#00ffff;
-  stroke-width: 20px;
+  stroke-width: 17px;
 }
 
 #timer-circle {
   fill: none;
-  stroke-width: 20px;
+  stroke-width: 17px;
   transform: rotate(270deg);
   transform-origin: center;
   transition: stroke-dashoffset 1s linear;
@@ -70,7 +70,7 @@ header {
 
 #timer-number {
   fill: white;
-  font-size: 65px;
+  font-size: 50px;
   text-anchor: middle;
   dominant-baseline: middle;
 }
