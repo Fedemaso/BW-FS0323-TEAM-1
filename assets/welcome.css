@@ -48,6 +48,10 @@ main {
     margin: 0px 6em 0px 6em;
 }
 
+header {
+    min-height: 10vh;
+}
+
 #logo {
     width: 10em;
     margin-top: 5em;
