@@ -210,7 +210,6 @@ function addClasstoRBParent() {
   }
 }
 
-
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
   countdown = 60; // Reimposta il countdown a 60
