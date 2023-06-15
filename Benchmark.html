@@ -5,21 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Benchmark</title>
     <link rel="stylesheet" href="assets/benchmark.css" />
-
-    <style>
-      #timer-circle {
-        stroke-dasharray: 100 100;
-        transition: stroke-dasharray 1s linear;
-      }
-    </style>
   </head>
   <body>
     <header>
       <img id="logo" src="assets/epicode_logo.png" alt="logo epicode" />
+
       <div id="timer">
-        <div id="timer-number"></div>
         <svg id="timer-svg">
-          <circle id="timer-circle" r="65" cx="55" cy="65"></circle>
+          <circle id="timer-circle" cx="75" cy="75" r="70"></circle>
+          <text id="timer-number" x="75" y="75">60</text>
         </svg>
       </div>
     </header>
@@ -29,17 +23,19 @@
         <h2 id="question-text"></h2>
         <div id="options-container"></div>
       </div>
-
-      <div id="question-counter"></div>
     </main>
     <footer>
       <button id="nq-btn" onclick="handleAnswerSelection()">
         Next Question
       </button>
+      <div id="qn-div">
+        <span id="question-number"></span>
+          <span id="total-qn"></span>
+      </div>
       <div id="score-container">
         <h3>Score: <span id="score">0</span></h3>
       </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="js/benchmark.js"></script>
   </body>
 </html>

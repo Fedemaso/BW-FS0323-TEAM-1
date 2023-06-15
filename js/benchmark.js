@@ -1,4 +1,4 @@
-// // FedeMaso
+// // FedeMaso e GiuliaO
 
 // // DOMANDE
 
@@ -97,9 +97,9 @@ const questions = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
-
+const timerCircle = document.getElementById("timer-circle");
 let timerNumber = document.getElementById("timer-number");
-let countdown = 10;
+let countdown = 60;
 let timerInterval;
 
 timerNumber.textContent = countdown;
@@ -108,6 +108,14 @@ timerNumber.textContent = countdown;
 let currentQuestionIndex = 0; // Indice della domanda corrente
 let userAnswers = []; // Array per salvare le risposte dell'utente
 let score = 0; // Inizializza il punteggio a 0
+
+function updateQuestionNumber() {
+  const questionNumberElement = document.getElementById("question-number");
+  questionNumberElement.textContent = `Domanda ${currentQuestionIndex + 1}`
+  const totalQuestionNum = document.getElementById("total-qn");
+  totalQuestionNum.textContent = `/ ${questions.length}`;
+}
+updateQuestionNumber();
 
 // Funzione per mostrare la domanda corrente
 function showCurrentQuestion() {
@@ -123,55 +131,58 @@ function showCurrentQuestion() {
   optionsContainer.innerHTML = ""; // Rimuovi eventuali opzioni precedenti
 
   currentQuestion.incorrect_answers.forEach((option) => {
+    //Creazione elementi: radio-button, label e div
     const radioButton = document.createElement("input");
-    const radioButtonSgContainer = document.createElement("div"); // Contenitore opzioni singole
-    radioButtonSgContainer.classList.add("btn-container"); // Aggiunta classe per modifiche CSS
+    const optionLabel = document.createElement("label");
+    const radioButtonSgContainer = document.createElement("div");
+
+    //Aggiunta attributi agli elementi creati
+    //Al radio-button
     radioButton.type = "radio";
     radioButton.name = "answer";
     radioButton.classList = "radio-button";
     radioButton.value = option;
-    optionsContainer.appendChild(radioButtonSgContainer);
-    radioButtonSgContainer.appendChild(radioButton);
-
-    const optionLabel = document.createElement("label");
+    //Al div
+    radioButtonSgContainer.classList.add("btn-container");
+    //Alla label
     optionLabel.textContent = option;
-    radioButtonSgContainer.appendChild(optionLabel);
 
-    radioButtonSgContainer.appendChild(document.createElement("br"));
+    //Annidamento elementi con append, secondo la seguente struttura:
+    //optionsContainer (vedi riga 122) > label > div > radio-button
+
+    optionsContainer.appendChild(radioButtonSgContainer);
+    radioButtonSgContainer.appendChild(optionLabel);
+    optionLabel.appendChild(radioButton);
   });
 
   // Aggiungi l'opzione corretta come radio button
+
+  // Creazione elementi: radio-button, label e div
   const correctRadioButton = document.createElement("input");
-  const radioButtonSgContainer = document.createElement("div"); // Contenitore opzioni singole
-  radioButtonSgContainer.classList.add("btn-container"); // Aggiunta classe per modifiche CSS
+  const correctOptionLabel = document.createElement("label");
+  const radioButtonSgContainer = document.createElement("div");
+
+  // Aggiunta attributi agli elementi creati
+  // Al radio-button
   correctRadioButton.type = "radio";
   correctRadioButton.name = "answer";
   correctRadioButton.classList = "radio-button";
   correctRadioButton.value = currentQuestion.correct_answer;
-  optionsContainer.appendChild(radioButtonSgContainer);
-  radioButtonSgContainer.appendChild(correctRadioButton);
-
-  const correctOptionLabel = document.createElement("label");
+  // Al div
+  radioButtonSgContainer.classList.add("btn-container");
+  // Alla label
   correctOptionLabel.textContent = currentQuestion.correct_answer;
+
+  // Annidamento elementi con append, secondo la seguente struttura:
+  // optionsContainer (vedi riga 122) > label > div > radio-button
+  optionsContainer.appendChild(radioButtonSgContainer);
   radioButtonSgContainer.appendChild(correctOptionLabel);
-
-  radioButtonSgContainer.appendChild(document.createElement("br"));
-}
-
-// Mostra il numero della domanda (BOZZA: ANCORA NON FUNZIONANTE)
-
-let questionNumber = document.getElementById('question-counter')
-questionNumber.classList.add('question-counter')
-const questionIndexCounter = document.createElement('p')
-questionIndexCounter.textContent = currentQuestionIndex
-for(let i=0; i<currentQuestionIndex.lenght; i++){
-  questionNumber.appendChild(currentQuestionIndex[i])
+  correctOptionLabel.appendChild(correctRadioButton);
 }
 
 // Funzione per gestire la selezione di una risposta
-
 function handleAnswerSelection() {
-  countdown = 10; // Reimposta il countdown a 31
+  countdown = 60; // Reimposta il countdown a 60
 
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
@@ -183,7 +194,6 @@ function handleAnswerSelection() {
   if (selectedAnswer === currentQuestion.correct_answer) {
     // Aggiungi un punto al punteggio se la risposta è corretta
     score++;
-
   }
 
   // Aggiorna il punteggio visualizzato nell'HTML
@@ -193,10 +203,12 @@ function handleAnswerSelection() {
   // Passa alla domanda successiva
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
+    updateQuestionNumber(); // Aggiorna il numero della domanda corrente
     showCurrentQuestion();
   } else {
     // Se tutte le domande sono state risposte, visualizza i risultati
     clearInterval(timerInterval);
+    window.location.href = "Results.html";
     showResults();
   }
 
@@ -207,7 +219,7 @@ function handleAnswerSelection() {
 }
 
 function handleTimerExpiration() {
-  countdown = 10; // Reimposta il countdown a 31
+  countdown = 60; // Reimposta il countdown a 60
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
@@ -226,6 +238,7 @@ function handleTimerExpiration() {
   // Passa alla domanda successiva
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
+    updateQuestionNumber(); // Aggiorna il numero della domanda corrente
     showCurrentQuestion();
   } else {
     // Se tutte le domande sono state risposte, apri la pagina dei risultati
@@ -234,67 +247,86 @@ function handleTimerExpiration() {
     window.location.href = "Results.html"; // Redirect a fine test alla pagina dei risultati
     showResults();
   }
-
-  // Funzione per mostrare i risultati
-  function showResults() {
-    // Mostra i risultati delle risposte dell'utente
-    console.log("Risposte dell'utente:", userAnswers);
-  }
-
-  // Mostra la prima domanda all'avvio
-  showCurrentQuestion();
-
-  // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
-  function calculateResult() {
-    // Calcola il numero di risposte corrette
-    const correctAnswers = userAnswers.filter(
-      (answer, index) => answer === questions[index].correct_answer
-    );
-
-    // Crea l'elemento del banner dei risultati
-    const resultBanner = document.createElement("div");
-    resultBanner.id = "result-banner";
-
-    // Verifica il punteggio e imposta il contenuto del banner in base al risultato
-    if (correctAnswers.length < 5) {
-      resultBanner.className = "red";
-      resultBanner.textContent = "Non hai passato l'esame";
-    } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
-      resultBanner.className = "yellow";
-      resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
-    } else {
-      resultBanner.className = "green";
-      resultBanner.textContent =
-        "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
-    }
-
-    // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
-    const questionContainer = document.getElementById("question-container");
-    questionContainer.innerHTML = "";
-    questionContainer.appendChild(resultBanner);
-  }
-
-  // Mostra i risultati delle risposte dell'utente
-  function showResults() {
-    console.log("Risposte dell'utente:", userAnswers);
-    calculateResult();
-  }
 }
 
-let startTimer = function () {
-  countdown = 10;
+// HO COMMENTATO QUESTE FUNZIONI IN QUANTO NON DOVREBBERO PIU SERVIRE
+// // Funzione per mostrare i risultati
+// function showResults() {
+//   // Mostra i risultati delle risposte dell'utente
+//
+// }
 
-  timerInterval = setInterval(function () {
-    countdown = --countdown <= -1 ? 10 : countdown;
+// // Mostra la prima domanda all'avvio
+// showCurrentQuestion();
 
-    timerNumber.textContent = 'seconds \n' + countdown + '\n remaining';
+// // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
+// function calculateResult() {
+//   // Calcola il numero di risposte corrette
+//   const correctAnswers = userAnswers.filter(
+//     (answer, index) => answer === questions[index].correct_answer
+//   );
 
-    const progress = (countdown / 10) * 1000;
+//   // Crea l'elemento del banner dei risultati
+//   const resultBanner = document.createElement("div");
+//   resultBanner.id = "result-banner";
 
-    if (countdown === 0) {
-      handleTimerExpiration(); // Passa alla domanda successiva
-    }
-  }, 1000);
-};
+//   // Verifica il punteggio e imposta il contenuto del banner in base al risultato
+//   if (correctAnswers.length < 5) {
+//     resultBanner.className = "red";
+//     resultBanner.textContent = "Non hai passato l'esame";
+//   } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
+//     resultBanner.className = "yellow";
+//     resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
+//   } else {
+//     resultBanner.className = "green";
+//     resultBanner.textContent =
+//       "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
+//   }
+
+//   // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
+//   const questionContainer = document.getElementById("question-container");
+//   questionContainer.innerHTML = "";
+//   questionContainer.appendChild(resultBanner);
+// }
+
+//   // Mostra i risultati delle risposte dell'utente
+//   function showResults() {
+//
+//     calculateResult();
+//   }
+// }
+
+// TIMER 
+// Calcolo dell'offset del dash del cerchio
+let circle = document.getElementById("timer-circle");
+let circumference = 2 * Math.PI * circle.getAttribute("r");
+let offset = circumference - (countdown / 60) * circumference;
+
+// Aggiornamento dello stile del cerchio
+circle.style.strokeDasharray = circumference;
+circle.style.strokeDashoffset = offset;
+
+// Aggiornamento del colore del cerchio in base ai secondi
+if (countdown <= 10) {
+  circle.style.stroke = "red";
+} else {
+  circle.style.stroke = "#a11ff3";
+}
+
+function startTimer() {
+  timerInterval = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+  countdown--;
+  timerNumber.textContent = countdown;
+
+  let progress = (countdown / 60) * circumference;
+  circle.style.strokeDashoffset = circumference - progress;
+
+  if (countdown === 0) {
+    handleTimerExpiration();
+  }
+}
 
 startTimer();
