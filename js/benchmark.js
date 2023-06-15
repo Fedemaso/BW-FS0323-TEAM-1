@@ -111,9 +111,9 @@ let score = 0; // Inizializza il punteggio a 0
 
 function updateQuestionNumber() {
   const questionNumberElement = document.getElementById("question-number");
-  questionNumberElement.textContent = `Domanda ${currentQuestionIndex + 1} / ${
-    questions.length
-  }`;
+  questionNumberElement.textContent = `Domanda ${currentQuestionIndex + 1}`
+  const totalQuestionNum = document.getElementById("total-qn");
+  totalQuestionNum.textContent = `/ ${questions.length}`;
 }
 updateQuestionNumber();
 
@@ -155,26 +155,26 @@ function showCurrentQuestion() {
     optionLabel.appendChild(radioButton);
   });
 
-  //Aggiungi l'opzione corretta come radio button
+  // Aggiungi l'opzione corretta come radio button
 
-  //Creazione elementi: radio-button, label e div
+  // Creazione elementi: radio-button, label e div
   const correctRadioButton = document.createElement("input");
   const correctOptionLabel = document.createElement("label");
   const radioButtonSgContainer = document.createElement("div");
 
-  //Aggiunta attributi agli elementi creati
-  //Al radio-button
+  // Aggiunta attributi agli elementi creati
+  // Al radio-button
   correctRadioButton.type = "radio";
   correctRadioButton.name = "answer";
   correctRadioButton.classList = "radio-button";
   correctRadioButton.value = currentQuestion.correct_answer;
-  //Al div
+  // Al div
   radioButtonSgContainer.classList.add("btn-container");
-  //Alla label
+  // Alla label
   correctOptionLabel.textContent = currentQuestion.correct_answer;
 
-  //Annidamento elementi con append, secondo la seguente struttura:
-  //optionsContainer (vedi riga 122) > label > div > radio-button
+  // Annidamento elementi con append, secondo la seguente struttura:
+  // optionsContainer (vedi riga 122) > label > div > radio-button
   optionsContainer.appendChild(radioButtonSgContainer);
   radioButtonSgContainer.appendChild(correctOptionLabel);
   correctOptionLabel.appendChild(correctRadioButton);
@@ -296,6 +296,7 @@ function handleTimerExpiration() {
 //   }
 // }
 
+// TIMER 
 // Calcolo dell'offset del dash del cerchio
 let circle = document.getElementById("timer-circle");
 let circumference = 2 * Math.PI * circle.getAttribute("r");
