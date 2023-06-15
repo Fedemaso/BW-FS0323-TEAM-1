@@ -57,7 +57,7 @@ body {
 }
 
 .info-title {
-  font-family: Arial, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-weight: bold;
   font-size: 60px;
   line-height: 0.8;
@@ -73,7 +73,7 @@ body {
 .info-count {
   font-family: Verdana, sans-serif;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 0.8;
 }
 
@@ -100,13 +100,25 @@ h1 {
   font-family: 'Outfit', sans-serif;
   font-weight: bold;
   font-size: 1.5em;
-  cursor:pointer;
-  color:rgb(0 43 111);
-  background-color: #00FFFF;
-  box-shadow: 0px 1px 30px 0px #00FFFF;
-  border: none; 
+  cursor: pointer;
+  color: rgb(0, 43, 111);
+  background-color: transparent;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 100px;
+  box-shadow: none;
+  color: white;
+  background-color: transparent;
+  border: 2px solid white;
+  transition: color 0.3s;
+}
+
+.myButton:hover {
+  background-color: #00FFFF;
+  color: white;
+  box-shadow: 0px 1px 30px 0px #00FFFF;
+  border-color: #00FFFF;
+  color: #002B6F;
 }
