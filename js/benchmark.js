@@ -181,6 +181,24 @@ function showCurrentQuestion() {
   correctOptionLabel.appendChild(correctRadioButton);
 }
 
+// Funzione per passare alla domanda successiva
+function nextQuestion(){
+  currentQuestionIndex++;
+if (currentQuestionIndex < questions.length) {
+  updateQuestionNumber(); // Aggiorna il numero della domanda corrente
+  showCurrentQuestion();
+} else {
+  // Se tutte le domande sono state risposte, apri la pagina dei risultati
+  clearInterval(timerInterval);
+  window.location.href = "Results.html";
+}
+
+if (countdown === 0) {
+  handleTimerExpiration();
+  return;
+}
+}
+
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
   countdown = 60; // Reimposta il countdown a 60
@@ -191,7 +209,6 @@ function handleAnswerSelection() {
   userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
 
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
-
   if (selectedAnswer === currentQuestion.correct_answer) {
     // Aggiungi un punto al punteggio se la risposta è corretta
     score++;
@@ -201,23 +218,10 @@ function handleAnswerSelection() {
   const scoreElement = document.getElementById("score");
   scoreElement.textContent = score;
 
-  // Passa alla domanda successiva
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    updateQuestionNumber(); // Aggiorna il numero della domanda corrente
-    showCurrentQuestion();
-  } else {
-    // Se tutte le domande sono state risposte, apri la pagina dei risultati
-    clearInterval(timerInterval);
-    window.location.href = "Results.html";
-  }
-
-  if (countdown === 0) {
-    handleTimerExpiration();
-    return;
-  }
+  nextQuestion()
 }
 
+// Funzione per gestire lo scadere del tempo
 function handleTimerExpiration() {
   countdown = 60; // Reimposta il countdown a 60
   const selectedAnswer = document.querySelector(
@@ -235,65 +239,8 @@ function handleTimerExpiration() {
   const scoreElement = document.getElementById("score");
   scoreElement.textContent = score;
 
-  // Passa alla domanda successiva
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    updateQuestionNumber(); // Aggiorna il numero della domanda corrente
-    showCurrentQuestion();
-  } else {
-    // Se tutte le domande sono state risposte, apri la pagina dei risultati
-    clearInterval(timerInterval);
-
-    window.location.href = "Results.html"; // Redirect a fine test alla pagina dei risultati
-  }
+  nextQuestion()
 }
-
-// HO COMMENTATO QUESTE FUNZIONI IN QUANTO NON DOVREBBERO PIU SERVIRE
-// // Funzione per mostrare i risultati
-// function showResults() {
-//   // Mostra i risultati delle risposte dell'utente
-//
-// }
-
-// // Mostra la prima domanda all'avvio
-// showCurrentQuestion();
-
-// // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
-// function calculateResult() {
-//   // Calcola il numero di risposte corrette
-//   const correctAnswers = userAnswers.filter(
-//     (answer, index) => answer === questions[index].correct_answer
-//   );
-
-//   // Crea l'elemento del banner dei risultati
-//   const resultBanner = document.createElement("div");
-//   resultBanner.id = "result-banner";
-
-//   // Verifica il punteggio e imposta il contenuto del banner in base al risultato
-//   if (correctAnswers.length < 5) {
-//     resultBanner.className = "red";
-//     resultBanner.textContent = "Non hai passato l'esame";
-//   } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
-//     resultBanner.className = "yellow";
-//     resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
-//   } else {
-//     resultBanner.className = "green";
-//     resultBanner.textContent =
-//       "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
-//   }
-
-//   // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
-//   const questionContainer = document.getElementById("question-container");
-//   questionContainer.innerHTML = "";
-//   questionContainer.appendChild(resultBanner);
-// }
-
-//   // Mostra i risultati delle risposte dell'utente
-//   function showResults() {
-//
-//     calculateResult();
-//   }
-// }
 
 // TIMER 
 // Calcolo dell'offset del dash del cerchio
