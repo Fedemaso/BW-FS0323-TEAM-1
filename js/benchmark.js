@@ -201,6 +201,16 @@ if (countdown === 0) {
 }
 }
 
+// Funzione per aggiungere la classe al div del
+function addClasstoRBParent(){
+  let checked_RB = document.querySelector('input[name="answer"]:checked');
+  if(checked_RB != null){
+  checked_RB.parentElement.parentElement.classList.toggle('checked')
+  alert(checked_RB.value);
+  console.log(checked_RB.parentElement.parentElement)
+  }
+}
+
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
   countdown = 60; // Reimposta il countdown a 60
@@ -209,6 +219,8 @@ function handleAnswerSelection() {
     'input[name="answer"]:checked'
   )?.value;
   userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
+
+  addClasstoRBParent()
 
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
   if (selectedAnswer === currentQuestion.correct_answer) {
