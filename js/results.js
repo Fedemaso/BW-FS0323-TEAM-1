@@ -1,7 +1,7 @@
 //Valori grafico
 const totalQuestions = 10; // Numero totale di domande
-var quizScore = 6; // Recuperare lo score del quiz da localStorage o altro metodo di archiviazione
-var incorrectAnswers = totalQuestions - quizScore; // Calcola il numero di risposte errate
+let quizScore = localStorage.getItem('result'); // Recuperare lo score del quiz da localStorage o altro metodo di archiviazione
+let incorrectAnswers = totalQuestions - quizScore; // Calcola il numero di risposte errate
 
 // Calcolo delle angolazioni in radianti
 const totalAngle = 2 * Math.PI;
