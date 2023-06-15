@@ -1,6 +1,6 @@
 // FedeMaso e GiuliaO
 
-localStorage.removeItem('result')
+localStorage.removeItem("result");
 
 // DOMANDE
 const questions = [
@@ -149,14 +149,14 @@ function showCurrentQuestion() {
     optionLabel.textContent = option;
 
     //Annidamento elementi con append, secondo la seguente struttura:
-    //optionsContainer (vedi riga 122) > label > div > radio-button
+    //optionsContainer (vedi riga 122) > div > label > radio-button
 
     optionsContainer.appendChild(radioButtonSgContainer);
     radioButtonSgContainer.appendChild(optionLabel);
     optionLabel.appendChild(radioButton);
   });
 
-  // Aggiungi l'opzione corretta come radio button
+  // Aggiunta dell'opzione corretta come radio button
 
   // Creazione elementi: radio-button, label e div
   const correctRadioButton = document.createElement("input");
@@ -175,33 +175,16 @@ function showCurrentQuestion() {
   correctOptionLabel.textContent = currentQuestion.correct_answer;
 
   // Annidamento elementi con append, secondo la seguente struttura:
-  // optionsContainer (vedi riga 122) > label > div > radio-button
+  // optionsContainer (vedi riga 122) > div > label > radio-button
   optionsContainer.appendChild(radioButtonSgContainer);
   radioButtonSgContainer.appendChild(correctOptionLabel);
   correctOptionLabel.appendChild(correctRadioButton);
 }
 
-// Funzione per gestire la selezione di una risposta
-function handleAnswerSelection() {
-  countdown = 60; // Reimposta il countdown a 60
+showCurrentQuestion();
 
-  const selectedAnswer = document.querySelector(
-    'input[name="answer"]:checked'
-  )?.value;
-  userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
-
-  const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
-
-  if (selectedAnswer === currentQuestion.correct_answer) {
-    // Aggiungi un punto al punteggio se la risposta è corretta
-    score++;
-  }
-
-  // Aggiorna il punteggio visualizzato nell'HTML
-  const scoreElement = document.getElementById("score");
-  scoreElement.textContent = score;
-
-  // Passa alla domanda successiva
+// Funzione per passare alla domanda successiva
+function nextQuestion() {
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
     updateQuestionNumber(); // Aggiorna il numero della domanda corrente
@@ -218,12 +201,29 @@ function handleAnswerSelection() {
   }
 }
 
-function handleTimerExpiration() {
+// Funzione per aggiungere la classe al div del
+function addClasstoRBParent() {
+  let checked_RB = document.querySelector('input[name="answer"]:checked');
+  if(checked_RB != null){
+  checked_RB.parentElement.parentElement.classList.toggle('checked')
+  console.log(checked_RB.parentElement.parentElement)
+  }
+}
+
+// Funzione per gestire la selezione di una risposta
+function handleAnswerSelection() {
   countdown = 60; // Reimposta il countdown a 60
+
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
-  userAnswers.push(null); // Aggiungi una risposta nullo per indicare che il tempo è scaduto
+  if(selectedAnswer != null){
+    userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
+  } else {
+    userAnswers.push(null); // Aggiungi una risposta nullo per indicare che il tempo è scaduto
+  }
+
+  addClasstoRBParent();
 
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
   if (selectedAnswer === currentQuestion.correct_answer) {
@@ -235,82 +235,18 @@ function handleTimerExpiration() {
   const scoreElement = document.getElementById("score");
   scoreElement.textContent = score;
 
-  // Passa alla domanda successiva
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    updateQuestionNumber(); // Aggiorna il numero della domanda corrente
-    showCurrentQuestion();
-  } else {
-    // Se tutte le domande sono state risposte, apri la pagina dei risultati
-    clearInterval(timerInterval);
-
-    window.location.href = "Results.html"; // Redirect a fine test alla pagina dei risultati
-  }
+  nextQuestion();
 }
-
-// HO COMMENTATO QUESTE FUNZIONI IN QUANTO NON DOVREBBERO PIU SERVIRE
-// // Funzione per mostrare i risultati
-// function showResults() {
-//   // Mostra i risultati delle risposte dell'utente
-//
-// }
-
-// // Mostra la prima domanda all'avvio
-// showCurrentQuestion();
-
-// // Funzione per calcolare il risultato e visualizzare la pagina dei risultati
-// function calculateResult() {
-//   // Calcola il numero di risposte corrette
-//   const correctAnswers = userAnswers.filter(
-//     (answer, index) => answer === questions[index].correct_answer
-//   );
-
-//   // Crea l'elemento del banner dei risultati
-//   const resultBanner = document.createElement("div");
-//   resultBanner.id = "result-banner";
-
-//   // Verifica il punteggio e imposta il contenuto del banner in base al risultato
-//   if (correctAnswers.length < 5) {
-//     resultBanner.className = "red";
-//     resultBanner.textContent = "Non hai passato l'esame";
-//   } else if (correctAnswers.length >= 5 && correctAnswers.length <= 8) {
-//     resultBanner.className = "yellow";
-//     resultBanner.textContent = "Hai passato l'esame con un buon punteggio";
-//   } else {
-//     resultBanner.className = "green";
-//     resultBanner.textContent =
-//       "Hai passato l'esame con un ottimo punteggio! COMPLIMENTI";
-//   }
-
-//   // Rimuovi il contenuto precedente e aggiungi il banner dei risultati
-//   const questionContainer = document.getElementById("question-container");
-//   questionContainer.innerHTML = "";
-//   questionContainer.appendChild(resultBanner);
-// }
-
-//   // Mostra i risultati delle risposte dell'utente
-//   function showResults() {
-//
-//     calculateResult();
-//   }
-// }
 
 // TIMER 
 // Calcolo dell'offset del dash del cerchio
+
 let circle = document.getElementById("timer-circle");
 let circumference = 2 * Math.PI * circle.getAttribute("r");
-let offset = circumference - (countdown / 60) * circumference;
 
 // Aggiornamento dello stile del cerchio
 circle.style.strokeDasharray = circumference;
-circle.style.strokeDashoffset = offset;
-
-// Aggiornamento del colore del cerchio in base ai secondi
-if (countdown <= 10) {
-  circle.style.stroke = "red";
-} else {
-  circle.style.stroke = "#a11ff3";
-}
+circle.style.strokeDashoffset = 0;
 
 function startTimer() {
   timerInterval = setInterval(updateTimer, 1000);
@@ -321,10 +257,10 @@ function updateTimer() {
   timerNumber.textContent = countdown;
 
   let progress = (countdown / 60) * circumference;
-  circle.style.strokeDashoffset = circumference - progress;
+  circle.style.strokeDashoffset = progress;
 
   if (countdown === 0) {
-    handleTimerExpiration();
+    handleAnswerSelection();
   }
 }
 
