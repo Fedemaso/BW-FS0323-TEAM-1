@@ -1,6 +1,7 @@
-//Valori del grafico
-const totalQuestions = 10; // Numero totale di domande
-const correctAnswers = 3; // Numero di risposte corrette
+//GRAFICO DA INSERIRE VALORI
+
+const totalQuestions = 6; // Numero totale di domande
+const correctAnswers = 4; // Numero di risposte corrette
 const incorrectAnswers = totalQuestions - correctAnswers; // Numero di risposte sbagliate
 
 // Calcolo delle angolazioni in radianti
