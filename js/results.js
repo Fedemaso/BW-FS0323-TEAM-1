@@ -1,39 +1,17 @@
-//GRAFICO DA INSERIRE VALORI
-
-const totalQuestions = 6; // Numero totale di domande
-const correctAnswers = 4; // Numero di risposte corrette
-const incorrectAnswers = totalQuestions - correctAnswers; // Numero di risposte sbagliate
+//Valori grafico
+const totalQuestions = 10; // Numero totale di domande
+var quizScore = 4; // Recuperare lo score del quiz da localStorage o altro metodo di archiviazione
+var incorrectAnswers = totalQuestions - quizScore; // Calcola il numero di risposte errate
 
 // Calcolo delle angolazioni in radianti
 const totalAngle = 2 * Math.PI;
-const correctAngle = (correctAnswers / totalQuestions) * totalAngle;
+const correctAngle = (quizScore / totalQuestions) * totalAngle;
 const incorrectAngle = (incorrectAnswers / totalQuestions) * totalAngle;
 
 // Funzione per aggiornare il grafico con i nuovi dati
 function updateChart() {
-  const incorrectAnswersCount = totalQuestions - correctAnswersCount;
-  const correctAngle = (correctAnswersCount / totalQuestions) * totalAngle;
-  const incorrectAngle = (incorrectAnswersCount / totalQuestions) * totalAngle;
   config.data.datasets[0].data = [incorrectAngle, correctAngle];
   chart.update();
-}
-
-// Funzione di rendering personalizzato per il testo nel centro del grafico
-function renderText(chart) {
-  var width = chart.width;
-  var height = chart.height;
-  var ctx = chart.ctx;
-  ctx.restore();
-
-  var text = "Congratulations!"; // Testo da inserire nel centro del grafico
-  var fontSize = (height / 100).toFixed(2);
-  ctx.font = fontSize + "em sans-serif";
-  ctx.textBaseline = "middle";
-  var textX = Math.round((width - ctx.measureText(text).width) / 2);
-  var textY = height / 2;
-
-  ctx.fillText(text, textX, textY);
-  ctx.save();
 }
 
 // Configurazione iniziale del grafico
@@ -59,7 +37,6 @@ const config = {
       tooltip: {
         enabled: false
       },
-      render: renderText // Funzione di rendering personalizzato
     }
   }
 };
@@ -71,3 +48,28 @@ const chart = new Chart(ctx, config);
 const validate = () => {
   window.location.href = "Feedback.html";
 }
+
+// Funzione per aggiornare le informazioni del grafico
+function updateChartInfo() {
+  const chartInfoLeft = document.getElementById("chart-info-left");
+  const chartInfoRight = document.getElementById("chart-info-right");
+
+  const correctPercentage = Math.round((quizScore / totalQuestions) * 100);
+  const correctCount = quizScore;
+  const incorrectCount = incorrectAnswers;
+
+  chartInfoLeft.innerHTML = `
+    Correct<br>
+    ${correctPercentage}%<br>
+    ${correctCount}/${totalQuestions} questions
+  `;
+
+  chartInfoRight.innerHTML = `
+    Wrong<br>
+    ${100 - correctPercentage}%<br>
+    ${incorrectCount}/${totalQuestions} questions
+  `;
+}
+
+// Chiamare la funzione `updateChartInfo()` dopo aver creato il grafico
+updateChartInfo();

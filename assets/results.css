@@ -31,6 +31,35 @@ body {
   flex-flow: column;
 }
 
+.chart-container {
+  position: relative;
+}
+
+.chart-info {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#chart-info-left {
+  left: 10px;
+  margin: 0px 0px 0px 200px;
+  font-size: 25px;
+  text-align: left;
+}
+
+#chart-info-right {
+  right: 10px;
+  margin: 0px 200px 0px 0px;
+  font-size: 25px;
+  text-align: right;
+}
+
 h1 {
   font-family: 'Outfit', sans-serif;
   color: white;
