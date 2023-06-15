@@ -181,6 +181,8 @@ function showCurrentQuestion() {
   correctOptionLabel.appendChild(correctRadioButton);
 }
 
+showCurrentQuestion()
+
 // Funzione per passare alla domanda successiva
 function nextQuestion(){
   currentQuestionIndex++;
