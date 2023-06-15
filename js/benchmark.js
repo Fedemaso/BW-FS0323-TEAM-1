@@ -297,20 +297,13 @@ function handleTimerExpiration() {
 // }
 
 // Calcolo dell'offset del dash del cerchio
+
 let circle = document.getElementById("timer-circle");
 let circumference = 2 * Math.PI * circle.getAttribute("r");
-let offset = circumference - (countdown / 60) * circumference;
 
 // Aggiornamento dello stile del cerchio
 circle.style.strokeDasharray = circumference;
-circle.style.strokeDashoffset = offset;
-
-// Aggiornamento del colore del cerchio in base ai secondi
-if (countdown <= 10) {
-  circle.style.stroke = "red";
-} else {
-  circle.style.stroke = "#a11ff3";
-}
+circle.style.strokeDashoffset = 0;
 
 function startTimer() {
   timerInterval = setInterval(updateTimer, 1000);
@@ -321,7 +314,7 @@ function updateTimer() {
   timerNumber.textContent = countdown;
 
   let progress = (countdown / 60) * circumference;
-  circle.style.strokeDashoffset = circumference - progress;
+  circle.style.strokeDashoffset = progress;
 
   if (countdown === 0) {
     handleTimerExpiration();
