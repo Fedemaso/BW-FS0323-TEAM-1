@@ -1,6 +1,6 @@
 // FedeMaso e GiuliaO
 
-localStorage.removeItem('result')
+localStorage.removeItem("result");
 
 // DOMANDE
 const questions = [
@@ -112,7 +112,7 @@ let score = 0; // Inizializza il punteggio a 0
 
 function updateQuestionNumber() {
   const questionNumberElement = document.getElementById("question-number");
-  questionNumberElement.textContent = `Domanda ${currentQuestionIndex + 1}`
+  questionNumberElement.textContent = `Domanda ${currentQuestionIndex + 1}`;
   const totalQuestionNum = document.getElementById("total-qn");
   totalQuestionNum.textContent = `/ ${questions.length}`;
 }
@@ -295,7 +295,7 @@ function handleTimerExpiration() {
 //   }
 // }
 
-// TIMER 
+// TIMER
 // Calcolo dell'offset del dash del cerchio
 
 let circle = document.getElementById("timer-circle");
