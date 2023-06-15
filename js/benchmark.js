@@ -1,6 +1,6 @@
 // FedeMaso e GiuliaO
 
-localStorage.removeItem('result')
+localStorage.removeItem("result");
 
 // DOMANDE
 const questions = [
@@ -149,14 +149,14 @@ function showCurrentQuestion() {
     optionLabel.textContent = option;
 
     //Annidamento elementi con append, secondo la seguente struttura:
-    //optionsContainer (vedi riga 122) > label > div > radio-button
+    //optionsContainer (vedi riga 122) > div > label > radio-button
 
     optionsContainer.appendChild(radioButtonSgContainer);
     radioButtonSgContainer.appendChild(optionLabel);
     optionLabel.appendChild(radioButton);
   });
 
-  // Aggiungi l'opzione corretta come radio button
+  // Aggiunta dell'opzione corretta come radio button
 
   // Creazione elementi: radio-button, label e div
   const correctRadioButton = document.createElement("input");
@@ -175,30 +175,39 @@ function showCurrentQuestion() {
   correctOptionLabel.textContent = currentQuestion.correct_answer;
 
   // Annidamento elementi con append, secondo la seguente struttura:
-  // optionsContainer (vedi riga 122) > label > div > radio-button
+  // optionsContainer (vedi riga 122) > div > label > radio-button
   optionsContainer.appendChild(radioButtonSgContainer);
   radioButtonSgContainer.appendChild(correctOptionLabel);
   correctOptionLabel.appendChild(correctRadioButton);
 }
 
-showCurrentQuestion()
+showCurrentQuestion();
 
 // Funzione per passare alla domanda successiva
-function nextQuestion(){
+function nextQuestion() {
   currentQuestionIndex++;
-if (currentQuestionIndex < questions.length) {
-  updateQuestionNumber(); // Aggiorna il numero della domanda corrente
-  showCurrentQuestion();
-} else {
-  // Se tutte le domande sono state risposte, apri la pagina dei risultati
-  clearInterval(timerInterval);
-  window.location.href = "Results.html";
+  if (currentQuestionIndex < questions.length) {
+    updateQuestionNumber(); // Aggiorna il numero della domanda corrente
+    showCurrentQuestion();
+  } else {
+    // Se tutte le domande sono state risposte, apri la pagina dei risultati
+    clearInterval(timerInterval);
+    window.location.href = "Results.html";
+  }
+
+  if (countdown === 0) {
+    handleTimerExpiration();
+    return;
+  }
 }
 
-if (countdown === 0) {
-  handleTimerExpiration();
-  return;
-}
+// Funzione per aggiungere la classe al div del
+function addClasstoRBParent() {
+  let checked_RB = document.querySelector('input[name="answer"]:checked');
+  if(checked_RB != null){
+  checked_RB.parentElement.parentElement.classList.toggle('checked')
+  console.log(checked_RB.parentElement.parentElement)
+  }
 }
 
 // Funzione per gestire la selezione di una risposta
@@ -208,7 +217,13 @@ function handleAnswerSelection() {
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
-  userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
+  if(selectedAnswer != null){
+    userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
+  } else {
+    userAnswers.push(null); // Aggiungi una risposta nullo per indicare che il tempo è scaduto
+  }
+
+  addClasstoRBParent();
 
   const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
   if (selectedAnswer === currentQuestion.correct_answer) {
@@ -220,28 +235,7 @@ function handleAnswerSelection() {
   const scoreElement = document.getElementById("score");
   scoreElement.textContent = score;
 
-  nextQuestion()
-}
-
-// Funzione per gestire lo scadere del tempo
-function handleTimerExpiration() {
-  countdown = 60; // Reimposta il countdown a 60
-  const selectedAnswer = document.querySelector(
-    'input[name="answer"]:checked'
-  )?.value;
-  userAnswers.push(null); // Aggiungi una risposta nullo per indicare che il tempo è scaduto
-
-  const currentQuestion = questions[currentQuestionIndex]; // Ottieni la domanda corrente
-  if (selectedAnswer === currentQuestion.correct_answer) {
-    // Aggiungi un punto al punteggio se la risposta è corretta
-    score++;
-  }
-
-  // Aggiorna il punteggio visualizzato nell'HTML
-  const scoreElement = document.getElementById("score");
-  scoreElement.textContent = score;
-
-  nextQuestion()
+  nextQuestion();
 }
 
 // TIMER 
@@ -266,7 +260,7 @@ function updateTimer() {
   circle.style.strokeDashoffset = progress;
 
   if (countdown === 0) {
-    handleTimerExpiration();
+    handleAnswerSelection();
   }
 }
 
