@@ -208,6 +208,7 @@ function handleAnswerSelection() {
   } else {
     // Se tutte le domande sono state risposte, visualizza i risultati
     clearInterval(timerInterval);
+    window.location.href = "Results.html";
     showResults();
   }
 
