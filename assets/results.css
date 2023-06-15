@@ -31,10 +31,6 @@ body {
   flex-flow: column;
 }
 
-.chart-container {
-  position: relative;
-}
-
 .chart-info {
   position: absolute;
   top: 50%;
@@ -58,6 +54,27 @@ body {
   margin: 0px 200px 0px 0px;
   font-size: 25px;
   text-align: right;
+}
+
+.info-title {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 60px;
+  line-height: 0.8;
+}
+
+.info-percentage {
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 60px;
+  line-height: 0.8;
+}
+
+.info-count {
+  font-family: Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 0.8;
 }
 
 h1 {
@@ -91,5 +108,5 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50px;
+  margin: 100px;
 }

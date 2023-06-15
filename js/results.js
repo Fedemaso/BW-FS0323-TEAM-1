@@ -1,6 +1,6 @@
 //Valori grafico
 const totalQuestions = 10; // Numero totale di domande
-var quizScore = 4; // Recuperare lo score del quiz da localStorage o altro metodo di archiviazione
+var quizScore = 6; // Recuperare lo score del quiz da localStorage o altro metodo di archiviazione
 var incorrectAnswers = totalQuestions - quizScore; // Calcola il numero di risposte errate
 
 // Calcolo delle angolazioni in radianti
@@ -59,16 +59,16 @@ function updateChartInfo() {
   const incorrectCount = incorrectAnswers;
 
   chartInfoLeft.innerHTML = `
-    Correct<br>
-    ${correctPercentage}%<br>
-    ${correctCount}/${totalQuestions} questions
-  `;
+  <span class="info-title">Correct</span><br>
+  <span class="info-percentage">${correctPercentage}%</span><br>
+  <span class="info-count">${correctCount}/${totalQuestions} questions</span>
+`;
 
-  chartInfoRight.innerHTML = `
-    Wrong<br>
-    ${100 - correctPercentage}%<br>
-    ${incorrectCount}/${totalQuestions} questions
-  `;
+chartInfoRight.innerHTML = `
+  <span class="info-title">Wrong</span><br>
+  <span class="info-percentage">${100 - correctPercentage}%</span><br>
+  <span class="info-count">${incorrectCount}/${totalQuestions} questions</span>
+`;
 }
 
 // Chiamare la funzione `updateChartInfo()` dopo aver creato il grafico
