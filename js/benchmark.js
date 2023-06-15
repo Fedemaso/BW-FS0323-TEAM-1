@@ -1,7 +1,8 @@
-// // FedeMaso e GiuliaO
+// FedeMaso e GiuliaO
 
-// // DOMANDE
+localStorage.removeItem('result')
 
+// DOMANDE
 const questions = [
   {
     category: "Science: Computers",
@@ -206,10 +207,9 @@ function handleAnswerSelection() {
     updateQuestionNumber(); // Aggiorna il numero della domanda corrente
     showCurrentQuestion();
   } else {
-    // Se tutte le domande sono state risposte, visualizza i risultati
+    // Se tutte le domande sono state risposte, apri la pagina dei risultati
     clearInterval(timerInterval);
     window.location.href = "Results.html";
-    showResults();
   }
 
   if (countdown === 0) {
@@ -245,7 +245,6 @@ function handleTimerExpiration() {
     clearInterval(timerInterval);
 
     window.location.href = "Results.html"; // Redirect a fine test alla pagina dei risultati
-    showResults();
   }
 }
 
