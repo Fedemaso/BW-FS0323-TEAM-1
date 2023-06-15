@@ -19,19 +19,7 @@ body {
   margin-left: 10vh;
 }
 
-.myButton {
-  font-family: 'Outfit', sans-serif;
-  font-weight: bold;
-  font-size: 1.5em;
-cursor:pointer;
-color:rgb(0 43 111);
-  background-color: #00FFFF;
-  box-shadow: 0px 1px 30px 0px #00FFFF;
-  border: none;
-}
-
-
-
+/* TIMER */
 #timer {
   position: fixed;
   top: 100px;
@@ -47,7 +35,9 @@ color:rgb(0 43 111);
 
 #timer-circle {
   fill: none;
-  stroke-width: 10;
+  stroke-width: 10px;
+  stroke-dasharray: circumference; /* Aggiunto */
+  stroke-dashoffset: circumference; /* Aggiunto */
   transform: rotate(-90deg);
   transform-origin: center;
   transition: stroke-dashoffset 1s linear;
@@ -55,16 +45,19 @@ color:rgb(0 43 111);
 
 #timer-number {
   fill: white;
-  font-size: 68px;
+  font-size: 50px;
   text-anchor: middle;
   dominant-baseline: middle;
 }
 
+/* QUESTION */ 
 #question-container{
   min-width: 500;
   width: 700px;
   text-align: center;
-  margin: 250px auto;
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #question-text {
@@ -74,14 +67,17 @@ color:rgb(0 43 111);
   line-height: 1em;
   margin-bottom: 10vh;
 }
-
+ /* ANSWERS */
 .radio-button {
-  opacity: 0;
+  display: none;
 }
 
 label {
   cursor:pointer;
   display: inline-block;
+  margin: 5px 20px;
+  font-size: 0.8em;
+  font-weight: 700;
 }
 
 .checked {
@@ -102,7 +98,7 @@ label {
   background-color: #900080;
 }
 
-
+/* FOOTER: NEXT QUESTION BTN, QUESTION NUMBER */
 footer {
   position: fixed;
   left: 0;
@@ -112,9 +108,9 @@ footer {
   text-align: center;
 }
 
-/* #score-container{
+#score-container{
   opacity: 0;
-} */
+}
 
 #nq-btn {
 cursor:pointer;
@@ -126,10 +122,10 @@ color:rgb(0 43 111);
 background-color: #00FFFF;
 box-shadow: 0px 1px 30px 0px #00FFFF;
 border: none;
-margin-top: 10%;
+margin-top: 5%;
 }
 
 #question-number {
-  margin-top: 2%;
+  margin: 4%;
   font-size: 1.4em;
 }
