@@ -27,7 +27,7 @@ header {
 /* TIMER */
 #timer {
   position: fixed;
-  top: 100px;
+  top: 30px;
   right: 170px;
   width: 200px;
   height: 200px;
