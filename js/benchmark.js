@@ -210,6 +210,7 @@ function addClasstoRBParent() {
   }
 }
 
+
 // Funzione per gestire la selezione di una risposta
 function handleAnswerSelection() {
   countdown = 60; // Reimposta il countdown a 60
@@ -236,6 +237,7 @@ function handleAnswerSelection() {
   const scoreElement = document.getElementById("score");
   scoreElement.textContent = score;
 
+  
   nextQuestion();
 }
 
