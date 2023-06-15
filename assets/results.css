@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Outfit&display=swap');
+
 body {
-  font-family: 'Inter', sans-serif;
+  
   line-height: 1.25;
   color:white;
   background-image: url(../assets/bg.jpg);
@@ -37,12 +39,13 @@ body {
   transform: translateY(-50%);
   color: white;
   text-align: center;
-  font-family: 'Inter', sans-serif;
+  
   font-size: 16px;
   font-weight: bold;
 }
 
 #chart-info-left {
+  font-family: 'Inter', sans-serif;
   left: 10px;
   margin: 0px 0px 0px 200px;
   font-size: 25px;
@@ -50,6 +53,7 @@ body {
 }
 
 #chart-info-right {
+  font-family: 'Inter', sans-serif;
   right: 10px;
   margin: 0px 200px 0px 0px;
   font-size: 25px;
@@ -57,23 +61,22 @@ body {
 }
 
 .info-title {
-  font-family: Helvetica, sans-serif;
+  
   font-weight: bold;
   font-size: 60px;
   line-height: 0.8;
 }
 
 .info-percentage {
-  font-family: Helvetica, sans-serif;
+  
   font-weight: bold;
   font-size: 60px;
   line-height: 0.8;
 }
 
 .info-count {
-  font-family: Verdana, sans-serif;
-  font-weight: normal;
-  font-size: 20px;
+    font-weight: normal;
+  font-size: 16px;
   line-height: 0.8;
 }
 
@@ -86,6 +89,7 @@ h1 {
 }
 
 .paragrafo {
+  font-family: 'Inter', sans-serif;
   font-size: 20px; 
   margin: 0px 0px 30px;
 }
@@ -97,7 +101,7 @@ h1 {
 }
 
 .myButton {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: bold;
   font-size: 1.5em;
   cursor: pointer;

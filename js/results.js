@@ -1,6 +1,6 @@
 //Valori grafico
 const totalQuestions = 10; // Numero totale di domande
-let quizScore = localStorage.getItem('result'); // Recuperare lo score del quiz da localStorage o altro metodo di archiviazione
+let quizScore = localStorage.getItem("result"); // Recuperare lo score del quiz da localStorage o altro metodo di archiviazione
 let incorrectAnswers = totalQuestions - quizScore; // Calcola il numero di risposte errate
 
 // Calcolo delle angolazioni in radianti
@@ -16,29 +16,31 @@ function updateChart() {
 
 // Configurazione iniziale del grafico
 const config = {
-  type: 'doughnut',
+  type: "doughnut",
   data: {
-    datasets: [{
-      data: [incorrectAngle, correctAngle],
-      backgroundColor: ['#D20094', '#00FFFF'],
-      borderWidth: 0,
-      borderAlign: 'center',
-    }],
-    labels: ['Wrong', 'Correct']
+    datasets: [
+      {
+        data: [incorrectAngle, correctAngle],
+        backgroundColor: ["#D20094", "#00FFFF"],
+        borderWidth: 0,
+        borderAlign: "center",
+      },
+    ],
+    labels: ["Wrong", "Correct"],
   },
   options: {
-    cutout: 100, 
+    cutout: 90,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false
+        display: false,
       },
       tooltip: {
-        enabled: false
+        enabled: false,
       },
-    }
-  }
+    },
+  },
 };
 
 // Creazione del grafico
@@ -47,7 +49,7 @@ const chart = new Chart(ctx, config);
 
 const validate = () => {
   window.location.href = "Feedback.html";
-}
+};
 
 // Funzione per aggiornare le informazioni del grafico
 function updateChartInfo() {
@@ -64,7 +66,7 @@ function updateChartInfo() {
   <span class="info-count">${correctCount}/${totalQuestions} questions</span>
 `;
 
-chartInfoRight.innerHTML = `
+  chartInfoRight.innerHTML = `
   <span class="info-title">Wrong</span><br>
   <span class="info-percentage">${100 - correctPercentage}%</span><br>
   <span class="info-count">${incorrectCount}/${totalQuestions} questions</span>
