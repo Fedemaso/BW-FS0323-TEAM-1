@@ -11,6 +11,7 @@ body {
   background-size: 100%;
   background-repeat: no-repeat;
   object-fit: fill;
+
 }
 
 #logo {
@@ -19,36 +20,68 @@ body {
   margin-left: 10vh;
 }
 
+header {
+  display: inline-block;
+  max-width: 50%;
+}
+
+
+
+
+
 /* TIMER */
 #timer {
   position: fixed;
   top: 100px;
   right: 170px;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
 }
+
+#timer-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 #timer-svg {
   width: 100%;
   height: 100%;
 }
 
+#timer-circle-static {
+  fill: none;
+  stroke:#00ffff;
+  stroke-width: 20px;
+}
+
+
 #timer-circle {
   fill: none;
-  stroke-width: 10px;
-  stroke-dasharray: circumference; /* Aggiunto */
-  stroke-dashoffset: circumference; /* Aggiunto */
-  transform: rotate(-90deg);
+  stroke-width: 20px;
+  transform: rotate(270deg);
   transform-origin: center;
   transition: stroke-dashoffset 1s linear;
+  stroke: #96679b;;
+}
+
+#timer-seconds, #timer-remainings {
+  fill: white;
+  font-size: 12px;
+  text-anchor: middle;
 }
 
 #timer-number {
   fill: white;
-  font-size: 50px;
+  font-size: 65px;
   text-anchor: middle;
   dominant-baseline: middle;
 }
+
+
 
 /* QUESTION */ 
 #question-container{
