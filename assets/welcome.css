@@ -76,6 +76,16 @@ header {
     margin-left: 2em;
 }
 
+/* DIFFICULTY FORM */
+
+.formDifficulty {
+    margin-top: 2em;
+}
+
+.formDifficulty input {
+    margin-left: 2em;
+}
+
 /* BOTTOM SECTION */
 
 .bottom {
