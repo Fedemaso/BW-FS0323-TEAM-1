@@ -76,7 +76,7 @@ function updateChartInfo() {
   chartInfoLeft.innerHTML = `
   <span class="info-title">Correct</span><br>
   <span class="info-percentage">${correctPercentage}%</span><br>
-  <span class="info-count">${correctCount}/${totalQuestions} questions</span>
+  <span class="info-count">${correctCount ?? 0}/${totalQuestions} questions</span>
 `;
 
   chartInfoRight.innerHTML = `
@@ -88,3 +88,4 @@ function updateChartInfo() {
 
 // Chiamare la funzione `updateChartInfo()` dopo aver creato il grafico
 updateChartInfo();
+
