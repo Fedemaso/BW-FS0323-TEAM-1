@@ -79,10 +79,10 @@ function updateChartInfo() {
   <span class="info-count">${correctCount ?? 0}/${totalQuestions} questions</span>
 `;
 
-  chartInfoRight.innerHTML = `
-  <span class="info-title">Wrong</span><br>
-  <span class="info-percentage">${100 - correctPercentage}%</span><br>
-  <span class="info-count">${incorrectCount}/${totalQuestions} questions</span>
+chartInfoRight.innerHTML = `
+<span class="info-title">Wrong</span><br>
+<span class="info-percentage">${100 - correctPercentage}%</span><br>
+<span class="info-count">${incorrectCount ?? 0}/${totalQuestions} questions</span>
 `;
 }
 
