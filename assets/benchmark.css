@@ -107,10 +107,7 @@ label {
   font-family: 'Inter', sans-serif;
   cursor:pointer;
   display: inline-block;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  margin: 5px 20px;
   font-size: 1.1em;
   font-weight: 700;
 }
@@ -133,6 +130,9 @@ label {
 .btn-container:hover{
   background-color: #900080;
 }
+
+
+
 
 /* FOOTER: NEXT QUESTION BTN, QUESTION NUMBER */
 footer {

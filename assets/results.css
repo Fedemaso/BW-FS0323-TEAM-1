@@ -15,10 +15,8 @@ body {
 
 #logo {
   width: 10em;
-  margin-bottom: 2em;
-  position: absolute;
-  top: 50px;
-  left: 100px;
+  margin-top: 5em;
+  margin-left: 6em;
 }
 
 #chart {

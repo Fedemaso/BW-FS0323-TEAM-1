@@ -148,6 +148,15 @@ function showCurrentQuestion() {
     //Alla label
     optionLabel.textContent = option;
 
+    // Aggiunta event listener per colorare il contenitore della label di viola quando viene cliccata
+    optionLabel.addEventListener("click", function () {
+      const allContainers = document.querySelectorAll(".btn-container");
+      allContainers.forEach((container) => {
+        container.style.backgroundColor = ""; // Rimuovi il colore di sfondo da tutti i contenitori
+      });
+      radioButtonSgContainer.style.backgroundColor = "#900080"; // Colora il contenitore della label cliccata di viola
+    });
+
     //Annidamento elementi con append, secondo la seguente struttura:
     //optionsContainer (vedi riga 122) > div > label > radio-button
 
@@ -173,6 +182,15 @@ function showCurrentQuestion() {
   radioButtonSgContainer.classList.add("btn-container");
   // Alla label
   correctOptionLabel.textContent = currentQuestion.correct_answer;
+
+  // Aggiunta event listener per colorare il contenitore della label corretta di viola quando viene cliccata
+  correctOptionLabel.addEventListener("click", function () {
+    const allContainers = document.querySelectorAll(".btn-container");
+    allContainers.forEach((container) => {
+      container.style.backgroundColor = ""; // Rimuovi il colore di sfondo da tutti i contenitori
+    });
+    radioButtonSgContainer.style.backgroundColor = "#900080"; // Colora il contenitore della label corretta di viola
+  });
 
   // Annidamento elementi con append, secondo la seguente struttura:
   // optionsContainer (vedi riga 122) > div > label > radio-button
