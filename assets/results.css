@@ -32,7 +32,7 @@ body {
 
 .chart-message {
   position: relative;
-  transform: translateY(-520%);
+  transform: translateY(-222%);
   top: 50%;
   color: white;
   font-family: 'Inter', sans-serif;
