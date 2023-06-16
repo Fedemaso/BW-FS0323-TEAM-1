@@ -5,7 +5,8 @@ body {
   line-height: 1.25;
   color:white;
   background-image: url(../assets/bg.jpg);
-  background-size: cover;
+  background-size: 100%;
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   flex-direction: column;
