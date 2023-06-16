@@ -1,0 +1,117 @@
+/* IMPOSTAZIONI GENERALI */
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Outfit&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 1em;
+    line-height: 1.25;
+    color:white;
+    background-image: url(../assets/bg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+}
+
+/* FONT e INTERLINEA */
+
+h1 {
+    font-family: 'Outfit', sans-serif;
+    color: white;
+    font-size: 60px;
+    line-height: 0.8;
+    margin: 40px 0px 30px 0px;
+}
+
+/* MAIN */
+
+main {
+    margin: 0px 6em 0px 6em;
+}
+
+header {
+    min-height: 10vh;
+}
+
+#logo {
+    width: 10em;
+    margin-top: 5em;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    min-height: 70vh;
+    flex-flow: column;
+}
+
+/* BOTTOM SECTION */
+
+.bottom {
+    margin-top: 6em;
+}
+
+/* CHECK BOX */
+
+.b-contain {
+  position: relative;
+  padding-left: 2.5rem;
+  font-weight: bold;
+}
+
+.b-contain input {
+  display: none;
+}
+
+.b-contain span {
+  vertical-align: middle;
+}
+
+.b-contain input[type="checkbox"] ~ .b-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.25rem;
+  width: 1.25rem;
+  border: 2px solid rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.b-contain input[type="checkbox"] ~ .b-input::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 7px;
+  top: 3px;
+  width: 0.3rem;
+  height: 0.6rem;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.b-contain input:checked ~ .b-input::after {
+  display: block;
+}
+
+/* BOTTONE */
+
+.myButton {
+    margin-top: 2%;
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-decoration: none;
+	cursor:pointer;
+	color:rgb(0 43 111);
+    background-color: #00FFFF;
+    box-shadow: 0px 1px 30px 0px #00FFFF;
+    border: none;
+    text-align: center;
+    padding-top: 12px;
+    width: 300px;
+    height: 50px;
+}
+
+
+
