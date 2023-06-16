@@ -131,9 +131,6 @@ label {
   background-color: #900080;
 }
 
-
-
-
 /* FOOTER: NEXT QUESTION BTN, QUESTION NUMBER */
 footer {
   position: fixed;
@@ -145,7 +142,12 @@ footer {
 }
 
 #score-container{
-  opacity: 0;
+  font-family: 'Inter', sans-serif;
+  margin-top: 0.5%;
+}
+
+#score {
+  color:#D20094
 }
 
 #nq-btn {
@@ -164,7 +166,7 @@ font-size: 1.1em;
 }
 
 #qn-div {
-  margin: 4%;
+  margin-top: 4%;
   font-size: 1.4em;
   letter-spacing: 0.05em;
   font-family: 'Inter', sans-serif;
