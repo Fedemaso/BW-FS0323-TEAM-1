@@ -133,3 +133,35 @@ h1 {
   border-color: #00FFFF;
   color: #002B6F;
 }
+
+
+/* RISPOSTA GIUSTA */
+
+#result-text {
+  padding: 0px 70px 0px 70px;
+  text-align: center;
+}
+
+.chart-messageCorrect {
+  position: relative;
+  transform: translateY(-430%);
+  top: 50%;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* RISPOSTA ERRATA */
+
+.chart-messageWrong {
+  position: relative;
+  transform: translateY(-1150%);
+  top: 50%;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+

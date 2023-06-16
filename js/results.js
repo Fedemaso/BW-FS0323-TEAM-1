@@ -54,18 +54,23 @@ const validate = () => {
 // Funzione per aggiornare le informazioni del grafico
 function updateChartInfo() {
   const resultText = document.getElementById("result-text");
-
-  if (quizScore < 6) {
+  const correctCount = quizScore;
+  const resultBox = document.getElementById("result-text");
+  console.log(quizScore);
+  if (quizScore >= 6) {
+    resultBox.classList.add("chart-messageCorrect");
+    resultText.innerHTML = `Congratulations! <span style="color: #00FFFF;">You passed the exam.</span><br>We\'ll send you the certificate in a few minutes. Check your email (including promotions/spam folder).`;
+  } else if (quizScore < 6) {
+    resultBox.classList.add("chart-messageWrong");
     resultText.innerHTML =
       'Oh no! <span style="color: #D20094;">Unfortunately, you didn\'t pass the exam.</span>';
-  } else {
-    resultText.innerHTML = `Congratulations! <span style="color: #00FFFF;">You passed the exam.</span><br>We\'ll send you the certificate in a few minutes. Check your email (including promotions/spam folder).`;
-  }
+  } else console.log("ciao");
+
   const chartInfoLeft = document.getElementById("chart-info-left");
   const chartInfoRight = document.getElementById("chart-info-right");
 
   const correctPercentage = Math.round((quizScore / totalQuestions) * 100);
-  const correctCount = quizScore;
+
   const incorrectCount = incorrectAnswers;
 
   chartInfoLeft.innerHTML = `
