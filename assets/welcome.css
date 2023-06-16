@@ -87,6 +87,7 @@ header {
 .b-contain {
   position: relative;
   padding-left: 2.5rem;
+  font-weight: bold;
 }
 
 .b-contain input {
