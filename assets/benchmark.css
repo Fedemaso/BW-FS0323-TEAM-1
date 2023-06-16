@@ -15,8 +15,8 @@ body {
 
 #logo {
   width: 10em;
-  padding: 35px 0px 15px 0px;
-  margin-left: 10vh;
+  margin-top: 5em;
+  margin-left: 6em;
 }
 
 header {
@@ -85,7 +85,7 @@ header {
   min-width: 500;
   width: 700px;
   text-align: center;
-  margin-top: 200px;
+  margin-top: 150px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -169,5 +169,5 @@ font-size: 1.1em;
 }
 
 #total-qn {
-  color: #900080;
+  color: #D20094;
 }
