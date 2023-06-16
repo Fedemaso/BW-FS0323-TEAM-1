@@ -1,14 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Outfit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 body {
   color: white;
   background-image: url(../assets/bg.jpg);
   background-size: cover;
-  background-repeat: repeat;
-  display: flex;
-  align-items: center;
+  background-repeat: no-repeat;
   flex-direction: column;
   height: 50vh;
+}
+
+main {
+  width: 80%;
+  margin: 2px auto;
 }
 
 #logo {
@@ -23,6 +27,7 @@ body {
 }
 
 #container {
+  margin: 2px auto;
   width: 350px;
   height: 350px;
   justify-content: center;
@@ -30,7 +35,18 @@ body {
   flex-flow: column;
 }
 
-.chart-message {
+.chart-messageCorrect {
+  position: relative;
+  transform: translateY(-520%);
+  top: 50%;
+  margin-top: 20%;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.chart-messageWrong {
   position: relative;
   transform: translateY(-222%);
   top: 50%;
@@ -58,7 +74,8 @@ body {
 
 #chart-info-left {
   font-family: 'Inter', sans-serif;
-  left: 10px;
+  top: 50%;
+  right: 70%;
   margin: 0px 0px 0px 50px;
   font-size: 25px;
   text-align: left;
@@ -66,7 +83,8 @@ body {
 
 #chart-info-right {
   font-family: 'Inter', sans-serif;
-  right: 10px;
+  top: 50%;
+  left: 70%;
   margin: 0px 50px 0px 0px;
   font-size: 25px;
   text-align: right;
@@ -74,22 +92,22 @@ body {
 
 .info-title {
   
-  font-weight: bold;
+  font-weight: 300;
   font-size: 60px;
-  line-height: 0.8;
+  line-height: 1em;
 }
 
 .info-percentage {
-  
-  font-weight: bold;
+  font-weight: 700;
   font-size: 60px;
-  line-height: 0.8;
+  line-height: 1em;
 }
 
 .info-count {
-    font-weight: normal;
+  font-weight: 300;
   font-size: 16px;
   line-height: 0.8;
+  letter-spacing: 0.06em;
 }
 
 h1 {
