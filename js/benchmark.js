@@ -112,7 +112,7 @@ let score = 0; // Inizializza il punteggio a 0
 
 function updateQuestionNumber() {
   const questionNumberElement = document.getElementById("question-number");
-  questionNumberElement.textContent = `QUESTION ${currentQuestionIndex + 1}`
+  questionNumberElement.textContent = `QUESTION ${currentQuestionIndex + 1}`;
   const totalQuestionNum = document.getElementById("total-qn");
   totalQuestionNum.textContent = `/ ${questions.length}`;
 }
@@ -204,9 +204,9 @@ function nextQuestion() {
 // Funzione per aggiungere la classe al div del
 function addClasstoRBParent() {
   let checked_RB = document.querySelector('input[name="answer"]:checked');
-  if(checked_RB != null){
-  checked_RB.parentElement.parentElement.classList.toggle('checked')
-  console.log(checked_RB.parentElement.parentElement)
+  if (checked_RB != null) {
+    checked_RB.parentElement.parentElement.classList.toggle("checked");
+    console.log(checked_RB.parentElement.parentElement);
   }
 }
 
@@ -217,7 +217,7 @@ function handleAnswerSelection() {
   const selectedAnswer = document.querySelector(
     'input[name="answer"]:checked'
   )?.value;
-  if(selectedAnswer != null){
+  if (selectedAnswer != null) {
     userAnswers.push(selectedAnswer); // Salva la risposta dell'utente
   } else {
     userAnswers.push(null); // Aggiungi una risposta nullo per indicare che il tempo è scaduto
@@ -229,18 +229,17 @@ function handleAnswerSelection() {
   if (selectedAnswer === currentQuestion.correct_answer) {
     // Aggiungi un punto al punteggio se la risposta è corretta
     score++;
-    localStorage.setItem('result', score) // Memorizzazione valore nel localStorage
+    localStorage.setItem("result", score); // Memorizzazione valore nel localStorage
   }
 
   // Aggiorna il punteggio visualizzato nell'HTML
   const scoreElement = document.getElementById("score");
   scoreElement.textContent = score;
 
-  
   nextQuestion();
 }
 
-// TIMER 
+// TIMER
 // Calcolo dell'offset del dash del cerchio
 
 let circle = document.getElementById("timer-circle");
