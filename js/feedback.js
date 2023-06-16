@@ -25,11 +25,9 @@ const returRating = (stars) => {
 
 returRating(ratingStars)
 
-
 // FUNZIONE FORM
 
 const form = document.getElementById("sendComment")
-const comment = document.querySelector("input")
 
 const validateForm = (event) => {
    event.preventDefault()
