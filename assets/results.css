@@ -75,12 +75,14 @@ body {
 }
 
 .info-title {
+  
   font-weight: bold;
   font-size: 60px;
   line-height: 0.8;
 }
 
 .info-percentage {
+  
   font-weight: bold;
   font-size: 60px;
   line-height: 0.8;

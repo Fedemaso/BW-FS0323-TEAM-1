@@ -91,7 +91,8 @@ header {
 
 .feedback input {
     text-align: center;
-    width: 45vw;
+    font-size: 1em;
+    width: 30vw;
     background: transparent;
     border-style:hidden;
     color:#9e9e9e;
@@ -106,7 +107,7 @@ header {
 .horizontal-rule {
     border-bottom: 2px solid;
     border-color: #900080;
-    width: 50vw;
+    width: 32vw;
     margin: 10px auto 10px auto;
 }
 

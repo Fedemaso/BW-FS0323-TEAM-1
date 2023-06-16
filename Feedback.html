@@ -13,7 +13,13 @@
   <body>
     <main>
       <header>
-        <img id="logo" src="assets/epicode_logo.png" alt="logo epicode" />
+        <a
+          href="https://epicode.com/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img id="logo" src="assets/epicode_logo.png" alt="logo epicode" />
+        </a>
       </header>
       <div class="container">
         <h1 class="fontOutfitBold">Tell us how it's going</h1>
@@ -22,7 +28,7 @@
           or a colleague?
         </p>
         <section class="rating">
-          <img class="starInactive" src="assets/star_dark.svg" alt="" />
+          <img class="starInactive" src="assets/star.svg" alt="" />
           <img class="starInactive" src="assets/star_dark.svg" alt="" />
           <img class="starInactive" src="assets/star_dark.svg" alt="" />
           <img class="starInactive" src="assets/star_dark.svg" alt="" />
@@ -35,13 +41,9 @@
         </section>
         <section class="feedback">
           <p>Leave us an open feedback about your experience so far</p>
-          <div>
-            <input
-              type="text"
-              id="feedback-input"
-              placeholder="Write your comment here"
-            />
-          </div>
+          <form action="" method="get" id="sendComment" name="sendComment">
+            <input type="text" placeholder="Write your comment here" />
+          </form>
           <div class="horizontal-rule"></div>
         </section>
         <div class="bottom">
