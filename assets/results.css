@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Outfit&display=swap');
 
 body {
-  
-  line-height: 1.25;
-  color:white;
+  color: white;
   background-image: url(../assets/bg.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
+  background-size: cover;
+  background-repeat: repeat;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -25,26 +23,25 @@ body {
 }
 
 #container {
-  width: 400px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   justify-content: center;
   text-align: center;
   flex-flow: column;
 }
 
 .chart-message {
-  position: absolute;
+  position: relative;
+  transform: translateY(-520%);
   top: 50%;
-  transform: translateY(-80%);
   color: white;
-  text-align: center;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: bold;
 }
 
 #result-text {
-  margin: 0px 700px 0px 140px;
+  padding: 0px 100px 0px 100px;
   text-align: center;
 }
 
@@ -62,7 +59,7 @@ body {
 #chart-info-left {
   font-family: 'Inter', sans-serif;
   left: 10px;
-  margin: 0px 0px 0px 200px;
+  margin: 0px 0px 0px 50px;
   font-size: 25px;
   text-align: left;
 }
@@ -70,7 +67,7 @@ body {
 #chart-info-right {
   font-family: 'Inter', sans-serif;
   right: 10px;
-  margin: 0px 200px 0px 0px;
+  margin: 0px 50px 0px 0px;
   font-size: 25px;
   text-align: right;
 }
@@ -100,7 +97,7 @@ h1 {
   color: white;
   font-size: 60px;
   line-height: 0.8;
-  margin: 90px 0px 0px;
+  margin: 90px 0px 15px;
 }
 
 .paragrafo {
@@ -110,7 +107,6 @@ h1 {
 }
 
 .bottom button {
-  margin-left: 4em;
   width: 9em;
   height: 2.5em;
 }
@@ -123,10 +119,6 @@ h1 {
   color: rgb(0, 43, 111);
   background-color: transparent;
   border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 100px;
   box-shadow: none;
   color: white;
   background-color: transparent;
